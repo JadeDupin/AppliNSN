@@ -80,23 +80,25 @@ function(input, output) {
     shinyjs::show(id ="DG_puiss_res_FR")
     
     output$DG_puiss_valeur_res <- renderUI({
-      str1 <- paste("Puissance :", DG_puiss_calc_puiss()$power)
-      str2 <- paste("Intervalle de confiance de la puissance : [", DG_puiss_calc_puiss()$powerCI[1], ";", DG_puiss_calc_puiss()$powerCI[2], "]")
-      str3 <- paste("se_beta_H0 :", DG_puiss_calc_puiss()$se_beta_H0)
-      str4 <- paste("se_beta_HA :", DG_puiss_calc_puiss()$se_beta_HA)
-      str5 <- paste("se_sigma0_2 :", DG_puiss_calc_puiss()$se_sigma0_2)
-      str6 <- paste("se_sigma1_2 :", DG_puiss_calc_puiss()$se_sigma1_2)
-      str7 <- paste("se_rho :", DG_puiss_calc_puiss()$se_rho)
-      str8 <- paste("se_cov :", DG_puiss_calc_puiss()$se_cov)
+      str1 <- paste("Power:", round(DG_puiss_calc_puiss()$power, digits=3))
+      str2 <- paste("Power confidence interval: [", round(DG_puiss_calc_puiss()$powerCI[1], digits=3), ";", round(DG_puiss_calc_puiss()$powerCI[2], digits=3), "]") #mettre un condition pour apparaitre que si bootstrap cocher
+      # str3 <- paste("se_beta_H0 :", DG_puiss_calc_puiss()$se_beta_H0)
+      # str4 <- paste("se_beta_HA :", DG_puiss_calc_puiss()$se_beta_HA)
+      # str5 <- paste("se_sigma0_2 :", DG_puiss_calc_puiss()$se_sigma0_2)
+      # str6 <- paste("se_sigma1_2 :", DG_puiss_calc_puiss()$se_sigma1_2)
+      # str7 <- paste("se_rho :", DG_puiss_calc_puiss()$se_rho)
+      # str8 <- paste("se_cov :", DG_puiss_calc_puiss()$se_cov)
       
       HTML(paste(str1,
-                 str2,
-                 str3,
-                 str4,
-                 str5,
-                 str6,
-                 str7,
-                 str8,
+                 if(input$DG_puiss_bootstrap){
+                   str2
+                  },
+                 # str3,
+                 # str4,
+                 # str5,
+                 # str6,
+                 # str7,
+                 # str8,
                  sep = '<br/>'))
     })
   })
@@ -144,23 +146,25 @@ function(input, output) {
     shinyjs::show(id = "DG_NSN_res_FR")
     
     output$DG_NSN_valeur_res <- renderUI({
-      str1 <- paste("Nombre de groupes nécessaires :", DG_NSN_calc_NSN()$G)
-      str2 <- paste("Intervalle de confiance du nombre de groupe : [", DG_NSN_calc_NSN()$G_CI[1], ";", DG_NSN_calc_NSN()$G_CI[2], "]")
+      str1 <- paste("Number of groups required:", DG_NSN_calc_NSN()$G)
+      str2 <- paste("confidence interval: [", DG_NSN_calc_NSN()$G_CI[1], ";", DG_NSN_calc_NSN()$G_CI[2], "]") #mettre un condition pour apparaitre que si bootstrap cocher
       
       if(length(DG_NSN_calc_NSN()$ni) == 2){
-        str3 <- paste("Nombre de sujets par groupe : U(", DG_NSN_calc_NSN()$ni[1], ";", DG_NSN_calc_NSN()$ni[2], ")")
+        str3 <- paste("Distribution of subject per group: U(", DG_NSN_calc_NSN()$ni[1], ";", DG_NSN_calc_NSN()$ni[2], ")")
       }
       else if(length(DG_NSN_calc_NSN()$ni) == 1){
-        str3 <- paste("Nombre de sujets par groupe :", DG_NSN_calc_NSN()$ni)
+        str3 <- paste("Number of subject per group:", DG_NSN_calc_NSN()$ni)
       }
       
-      str4 <- paste("Type de répartition des sujets :", DG_NSN_calc_NSN()$ni_type)
-      str5 <- paste("True power :", DG_NSN_calc_NSN()$true_power)
-      str6 <- paste("Erreur de type I :", DG_NSN_calc_NSN()$alpha)
-      str7 <- paste("HR :", DG_NSN_calc_NSN()$HR)
+      str4 <- paste("Type of subject distribution:", DG_NSN_calc_NSN()$ni_type)
+      str5 <- paste("True power:", DG_NSN_calc_NSN()$true_power)
+      str6 <- paste("Type I error:", DG_NSN_calc_NSN()$alpha)
+      str7 <- paste("HR:", DG_NSN_calc_NSN()$HR)
       
       HTML(paste(str1,
-                 str2,
+                 if(input$DG_NSN_bootstrap){
+                   str2
+                 },
                  str3,
                  str4,
                  str5,

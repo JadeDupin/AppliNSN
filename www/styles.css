@@ -4,6 +4,11 @@
     font-weight: bold;
 }
 
+#intro_sous_titre {
+    text-align: center; 
+    font-style: italic;
+}
+
 #titre_page {
     text-align: center; 
     font-weight: bold;
@@ -17,6 +22,11 @@
 
 #sous_titre_sous_partie {
     font-weight: bold;
+}
+
+#IC_titre {
+    font-weight: bold;
+    font-size: 16px; 
 }
 
 #DG_resultat_titre {
@@ -69,6 +79,18 @@
 }
 
 #DG_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DG_puiss_fisher {
     padding-left: 50px; 
     padding-right: 50px; 
     padding-top: 10px; 
@@ -145,6 +167,18 @@
 }
 
 #DG_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DG_NSN_fisher {
     padding-left: 50px; 
     padding-right: 50px; 
     padding-top: 10px; 
