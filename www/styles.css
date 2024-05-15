@@ -1,0 +1,218 @@
+
+/**** Titres de pages ****/
+#intro_titre {
+    font-weight: bold;
+}
+
+#titre_page {
+    text-align: center; 
+    font-weight: bold;
+}
+
+#sous_titre {
+    text-align: center; 
+    text-decoration: underline overline; 
+    font-weight: bold;
+}
+
+#sous_titre_sous_partie {
+    font-weight: bold;
+}
+
+#DG_resultat_titre {
+    padding-left: 60px; 
+    text-decoration: underline overline; 
+    font-weight: bold;
+}
+
+
+
+/**** Texte ****/
+#intro_texte_descr {
+    text-align: justify;
+}
+
+
+
+/**** Div des parametrages ****/
+#seed{
+    margin-left: 20%;
+}
+
+
+/* Introduction */
+#intro_FR {
+    margin-left: 5%;
+}
+
+
+/*DG - Puissance*/
+#DG_puiss_data_sujets_FR {
+    margin-left: 40px; 
+    margin-right: 30px; 
+    
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DG_puiss_data_sujets_div {
+    padding-left: 50px; 
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+
+#DG_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DG_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DG_puiss_simulation {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+#DG_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#DG_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+
+#DG_lance_puissance {
+    text-align: center;
+}
+
+
+#DG_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+/*DG - NSN*/
+#DG_NSN_data_sujet_FR {
+    margin-left: 40px; 
+    margin-right: 30px; 
+    
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DG_NSN_data_sujet_div {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+
+#DG_NSN_info_test_simu_FR {
+    padding-left: 50px
+}
+
+#DG_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DG_NSN_simulation {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+
+#DG_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#DG_NSN_data_essai {
+    padding-left: 50px; 
+    padding-top: 10px; 
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+
+#DG_lance_NSN {
+    text-align: center;
+}
+
+#DG_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+/**** Tables d'aide ****/
+table { 
+    margin: auto; 
+    width: 80%;
+    border-collapse: collapse 
+}
+
+th, td { 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+    padding-left: 10px; 
+    border: 1px solid 
+}
+
+th { 
+    text-align: center 
+}
