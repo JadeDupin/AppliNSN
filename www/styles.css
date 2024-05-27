@@ -5,6 +5,11 @@
 }
 
 #intro_sous_titre {
+    padding-left: 1%;
+    font-style: italic;
+}
+
+#sous_titre_page {
     text-align: center; 
     font-style: italic;
 }
@@ -35,10 +40,17 @@
     font-weight: bold;
 }
 
+#DR_resultat_titre {
+    padding-left: 60px; 
+    text-decoration: underline overline; 
+    font-weight: bold;
+}
+
 
 
 /**** Texte ****/
 #intro_texte_descr {
+    padding-left: 3%;
     text-align: justify;
 }
 
@@ -230,6 +242,666 @@
     font-size: 20px; 
     border: thick double #32a1ce;
 }
+
+
+
+
+/*DR - SFM - Puissance*/
+#DR_SFM_puiss_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_SFM_puiss_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_SFM_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_SFM_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_puiss_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_SFM_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_lance_puissance {
+    text-align: center;
+}
+
+
+#DR_SFM_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+
+/*DR - SFM - NSN*/
+#DR_SFM_NSN_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_SFM_NSN_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px; 
+    
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+
+#DR_SFM_NSN_info_test_simu_FR {
+    padding-left: 50px
+}
+
+#DR_SFM_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_SFM_NSN_data_essai_div {
+    padding-left: 50px; 
+    padding-top: 10px; 
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+
+#DR_SFM_lance_NSN {
+    text-align: center;
+}
+
+#DR_SFM_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+/*DR - NFM - Puissance*/
+#DR_NFM_puiss_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_NFM_puiss_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_NFM_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_NFM_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_puiss_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_NFM_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_lance_puissance {
+    text-align: center;
+}
+
+
+#DR_NFM_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+/*DR - NFM - NSN*/
+#DR_NFM_NSN_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_NFM_NSN_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_NFM_NSN_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_NFM_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_NFM_NSN_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_lance_NSN {
+    text-align: center;
+}
+
+
+#DR_NFM_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+/*DR - JFM - Puissance*/
+#DR_JFM_puiss_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_JFM_puiss_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_JFM_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_JFM_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_puiss_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_puiss_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_JFM_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_lance_puissance {
+    text-align: center;
+}
+
+
+#DR_JFM_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+
+/*DR - JFM - NSN*/
+#DR_JFM_NSN_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_JFM_NSN_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_JFM_NSN_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_JFM_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_NSN_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_JFM_NSN_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_JFM_lance_NSN {
+    text-align: center;
+}
+
+
+#DR_JFM_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+/*DR - GJFM - Puissance*/
+#DR_GJFM_puiss_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_GJFM_puiss_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_GJFM_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_GJFM_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_puiss_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_puiss_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_GJFM_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_lance_puissance {
+    text-align: center;
+}
+
+
+#DR_GJFM_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
+
+/*DR - GJFM - NSN*/
+#DR_GJFM_NSN_data_sujets_FR {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+#DR_GJFM_NSN_data_sujets_div {
+    margin-left: 40px; 
+    margin-right: 30px;
+
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#DR_GJFM_NSN_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#DR_GJFM_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_NSN_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#DR_GJFM_NSN_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_GJFM_lance_NSN {
+    text-align: center;
+}
+
+
+#DR_GJFM_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
 
 
 
