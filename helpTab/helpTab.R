@@ -486,52 +486,6 @@ tabDefOrder <- tabDef[order(tabDef$Nom),]
 
 choixTabHelp <- function(choix){
   
-  # tags$table(
-  # 
-  ## DG======================================================================================================
-    # if(choix == "DG_help"){
-    #   print("ok DG")
-    # 
-    #   for(i in 1:dim(tabDefOrder)[1]){
-    #     if (tabDefOrder$DG[i] == 1) {
-    #       print("tab help DG")
-    #       tags$tr(
-    #         tags$th(tabDefOrder$Nom[i]),
-    #           tags$td(tabDefOrder$Def[i])
-    #       )
-    #     }
-    #   }
-    # } # fin DG
-  
-  ## DR======================================================================================================
-    # else if(choix == "DR_help"){
-    #   print("ok DR")
-    #   for(i in 1:dim(tabDefOrder)[1]){
-    #     if (tabDefOrder$DR_SFM[i] == 1 || tabDefOrder$DR_NFM[i] == 1 || tabDefOrder$DR_JFM[i] == 1 || tabDefOrder$DR_GJFM[i] == 1) {
-    #       tags$tr(
-    #         tags$th(tabDefOrder$Nom[i]),
-    #         tags$td(tabDefOrder$Def[i])
-    #       )
-    #     }
-    #   }
-    # } # fin DR
-  
-  ## BSD=====================================================================================================
-  #   else if(choix == "BSD_help"){
-  #     print("ok BSD")
-  #     
-  #     for(i in 1:dim(tabDefOrder)[1]){
-  #       if (tabDefOrder$BSD[i] == 1) {
-  #         tags$tr(
-  #           tags$th(tabDefOrder$Nom[i]),
-  #             tags$td(tabDefOrder$Def[i])
-  #         )
-  #       }
-  #     }
-  #   } # fin BSD
-  # ) # fin tag$table 
-  
-  
   # Fonction pour générer les lignes de tableau
   generate_rows <- function(indices) {
     lapply(indices, function(i) {
