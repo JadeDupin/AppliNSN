@@ -1,18 +1,18 @@
 # README
 
 ## App 
-  Launch the app form the ui.R or server.R file.
+  Launch the app form the `ui.R` or `server.R` file.
 
 ## Help tables 
-  Build in the file \helpTab\helpTab.R
+  Build in the file `\helpTab\helpTab.R`
 
 ## Tests
   1. DG testing in :
-      - \tests_fonctions\test_AddFM.R
+      - `\tests_fonctions\test_AddFM.R`
   2. DR testing in :
-      - \tests_fonctions\test_SFM.R
-      - \tests_fonctions\test_NFM.R
-      - \tests_fonctions\test_JFM.R
-      - \tests_fonctions\test_GJFM.R
+      - `\tests_fonctions\test_SFM.R`
+      - `\tests_fonctions\test_NFM.R`
+      - `\tests_fonctions\test_JFM.R`
+      - `\tests_fonctions\test_GJFM.R`
   3. BSD testing in :
-      - \tests_fonctions\<coming soon>
+      - `\tests_fonctions\<coming soon>`
