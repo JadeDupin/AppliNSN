@@ -3,250 +3,255 @@
 #---------------------------------------------------------------------------------------------------#
 library(shiny)
 
+
+
 # Choix de table-------------------------------------------------------------------------------------
 ### DG puissance :  DG_puiss_help
 ### DG NSN :        DG_NSN_help
 ### DR tous les modèles pr puissance et NSN : DR_puiss_NSN_help
 ### BSD :
 
-# Fonction-------------------------------------------------------------------------------------------
-choixTabHelp0 <- function(choix){
-  
-  ## DG puissance====================================================================================
-  if(choix == "DG_puiss_help"){
-    tags$table(
-      
-      tags$tr(
-        tags$th("Bootstrap"),
-        tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
-      ),
-      
-      tags$tr(
-        tags$th("Correlation between both random effects"),
-        tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
-      ),
-      
-      tags$tr(
-        tags$th("Distribution of patient by groupe"),
-        tags$td("Distribution of subjects within groups :
-                            - Fixed: fixed number of subjects for each group
-                            - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
-      ),
-      
-      tags$tr(
-        tags$th("Follow-up period"),
-        tags$td("Duration of follow-up (same unit as the median).")
-      ),
-      
-      tags$tr(
-        tags$th("Hazard Ratio (HR)"),
-        tags$td("the hazard ratio or ratio of median survival times.")
-      ),
-      
-      tags$tr(
-        tags$th("Inclusion period"),
-        tags$td("Period allocated to patient inclusion (same unit as the median).")
-      ),
-      
-      tags$tr(
-        tags$th("Median survival time under H0"),
-        tags$td("The survival median under null hypothesis.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of bootstrap resamples"),
-        tags$td("Default 1000.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of groups"),
-        tags$td("Number of groups to calculate test power. Performs power estimation, when specified.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of Monte Carlo runs"),
-        tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of subjects per group"),
-        tags$td("Number of patients expected in each group.")
-      ),
-      
-      tags$tr(
-        tags$th("Ratio"),
-        tags$td("Randomization ratio in favor of the experimental arm. Default value is 1.")
-      ),
-      
-      tags$tr(
-        tags$th("Seed"),
-        tags$td("Seed for reproducing estimates.")
-      ),
-      
-      tags$tr(
-        tags$th("Shape parameter of Weibull"),
-        tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
-      ),
-      
-      tags$tr(
-        tags$th("Statistic"),
-        tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
-      ),
-      
-      tags$tr(
-        tags$th("Type I error"),
-        tags$td("Type I error rate or significance level. Default 0.05.")
-      ),
-      
-      tags$tr(
-        tags$th("Type of follow-up"),
-        tags$td("Defines how patients are monitored:
-                            - UptoEnd: from inclusion to end of study
-                            - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
-      ),
-      
-      tags$tr(
-        tags$th("Type of test"),
-        tags$td("Allows to specify the direction of the test:
-                            - 2-sided for two-sided 
-                            - 1-sided for unilateral")
-      ),
-      
-      tags$tr(
-        tags$th("Variance of treatment effect"),
-        tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
-      ),
-      
-      tags$tr(
-        tags$th("Variance of the baseline risk"),
-        tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
-      )
-    )
-  }
-  
-  ## DG NSN==========================================================================================
-  else if(choix == "DG_NSN_help"){
-    tags$table(
-      
-      tags$tr(
-        tags$th("Bootstrap"),
-        tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
-      ),
-      
-      tags$tr(
-        tags$th("Correlation between both random effects"),
-        tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
-      ),
-      
-      tags$tr(
-        tags$th("Distribution by groupe"),
-        tags$td("Distribution of subjects within groups :
-                            - Fixed: fixed number of subjects for each group
-                            - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
-      ),
-      
-      tags$tr(
-        tags$th("Follow-up period"),
-        tags$td("Duration of follow-up (same unit as the median).")
-      ),
-      
-      tags$tr(
-        tags$th("Hazard Ratio (HR)"),
-        tags$td("the hazard ratio or ratio of median survival times.")
-      ),
-      
-      tags$tr(
-        tags$th("Inclusion period"),
-        tags$td("Period allocated to patient inclusion (same unit as the median).")
-      ),
-      
-      tags$tr(
-        tags$th("Median survival time under H0"),
-        tags$td("The survival median under null hypothesis.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of bootstrap resamples"),
-        tags$td("Default 1000.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of Monte Carlo runs"),
-        tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
-      ),
-      
-      tags$tr(
-        tags$th("Number of subjects per group"),
-        tags$td("Number of patients expected in each group.")
-      ),
-      
-      tags$tr(
-        tags$th("Power"),
-        tags$td("The probability of detecting the predefined significant effect (HR) and is defined as 1-type II error.")
-      ),
-      
-      tags$tr(
-        tags$th("Ratio"),
-        tags$td("andomization ratio in favor of the experimental arm. Default value is 1.")
-      ),
-      
-      tags$tr(
-        tags$th("Seed"),
-        tags$td("Seed for reproducing estimates.")
-      ),
-      
-      tags$tr(
-        tags$th("Shape parameter of Weibull"),
-        tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
-      ),
-      
-      tags$tr(
-        tags$th("Statistic"),
-        tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
-      ),
-      
-      tags$tr(
-        tags$th("Type I error"),
-        tags$td("Type I error rate or significance level. Default 0.05.")
-      ),
-      
-      tags$tr(
-        tags$th("Type of follow-up"),
-        tags$td("Defines how patients are monitored:
-                            - UptoEnd: from inclusion to end of study
-                            - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
-      ),
-      
-      tags$tr(
-        tags$th("Type of test"),
-        tags$td("Allows to specify the direction of the test:
-                            - 2-sided for two-sided 
-                            - 1-sided for unilateral")
-      ),
-      
-      tags$tr(
-        tags$th("Variance of treatment effect"),
-        tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
-      ),
-      
-      tags$tr(
-        tags$th("Variance of the baseline risk"),
-        tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
-      )
-    )
-  }
-  
-  ## DR NSN==========================================================================================
-  else if(choix == "DR_puiss_NSN_help"){
-    tags$table(
-      
-      tags$tr(
-        tags$th("NAME"),
-        tags$td("DEF")
-      )
-    )
-  }
-}
+
+
+
+# # Fonction-------------------------------------------------------------------------------------------
+# choixTabHelp0 <- function(choix){
+#   
+#   ## DG puissance====================================================================================
+#   if(choix == "DG_puiss_help"){
+#     tags$table(
+#       
+#       tags$tr(
+#         tags$th("Bootstrap"),
+#         tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Correlation between both random effects"),
+#         tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Distribution of patient by groupe"),
+#         tags$td("Distribution of subjects within groups :
+#                             - Fixed: fixed number of subjects for each group
+#                             - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Follow-up period"),
+#         tags$td("Duration of follow-up (same unit as the median).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Hazard Ratio (HR)"),
+#         tags$td("the hazard ratio or ratio of median survival times.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Inclusion period"),
+#         tags$td("Period allocated to patient inclusion (same unit as the median).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Median survival time under H0"),
+#         tags$td("The survival median under null hypothesis.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of bootstrap resamples"),
+#         tags$td("Default 1000.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of groups"),
+#         tags$td("Number of groups to calculate test power. Performs power estimation, when specified.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of Monte Carlo runs"),
+#         tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of subjects per group"),
+#         tags$td("Number of patients expected in each group.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Ratio"),
+#         tags$td("Randomization ratio in favor of the experimental arm. Default value is 1.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Seed"),
+#         tags$td("Seed for reproducing estimates.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Shape parameter of Weibull"),
+#         tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Statistic"),
+#         tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type I error"),
+#         tags$td("Type I error rate or significance level. Default 0.05.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type of follow-up"),
+#         tags$td("Defines how patients are monitored:
+#                             - UptoEnd: from inclusion to end of study
+#                             - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type of test"),
+#         tags$td("Allows to specify the direction of the test:
+#                             - 2-sided for two-sided 
+#                             - 1-sided for unilateral")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Variance of treatment effect"),
+#         tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Variance of the baseline risk"),
+#         tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
+#       )
+#     )
+#   }
+#   
+#   ## DG NSN==========================================================================================
+#   else if(choix == "DG_NSN_help"){
+#     tags$table(
+#       
+#       tags$tr(
+#         tags$th("Bootstrap"),
+#         tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Correlation between both random effects"),
+#         tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Distribution by groupe"),
+#         tags$td("Distribution of subjects within groups :
+#                             - Fixed: fixed number of subjects for each group
+#                             - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Follow-up period"),
+#         tags$td("Duration of follow-up (same unit as the median).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Hazard Ratio (HR)"),
+#         tags$td("the hazard ratio or ratio of median survival times.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Inclusion period"),
+#         tags$td("Period allocated to patient inclusion (same unit as the median).")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Median survival time under H0"),
+#         tags$td("The survival median under null hypothesis.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of bootstrap resamples"),
+#         tags$td("Default 1000.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of Monte Carlo runs"),
+#         tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Number of subjects per group"),
+#         tags$td("Number of patients expected in each group.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Power"),
+#         tags$td("The probability of detecting the predefined significant effect (HR) and is defined as 1-type II error.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Ratio"),
+#         tags$td("andomization ratio in favor of the experimental arm. Default value is 1.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Seed"),
+#         tags$td("Seed for reproducing estimates.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Shape parameter of Weibull"),
+#         tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Statistic"),
+#         tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type I error"),
+#         tags$td("Type I error rate or significance level. Default 0.05.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type of follow-up"),
+#         tags$td("Defines how patients are monitored:
+#                             - UptoEnd: from inclusion to end of study
+#                             - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Type of test"),
+#         tags$td("Allows to specify the direction of the test:
+#                             - 2-sided for two-sided 
+#                             - 1-sided for unilateral")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Variance of treatment effect"),
+#         tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
+#       ),
+#       
+#       tags$tr(
+#         tags$th("Variance of the baseline risk"),
+#         tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
+#       )
+#     )
+#   }
+#   
+#   ## DR NSN==========================================================================================
+#   else if(choix == "DR_puiss_NSN_help"){
+#     tags$table(
+#       
+#       tags$tr(
+#         tags$th("NAME"),
+#         tags$td("DEF")
+#       )
+#     )
+#   }
+# }
 
 
 
@@ -254,6 +259,15 @@ choixTabHelp0 <- function(choix){
 
 
 # Dataset des définitions------------------------------------------------------------------------------------
+
+# Ordre des variables :   "Nom", 
+#                         "Def", 
+#                         "DG      (oui = 1 / non = 2)", 
+#                         "DR_SFM  (1/0)", 
+#                         "DR_NFM  (1/0)", 
+#                         "DR_JFM  (1/0)", 
+#                         "DR_GJFM (1/0)", 
+#                         "BSD     (1/0)"
 
 lign1 <- c("Bootstrap",  
            "Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).",
@@ -451,7 +465,7 @@ lign21 <- c("Power",
             0)
 
 
-#Table
+#Création de la table 
 tabDef <- data.frame(do.call("rbind", list(lign1, lign2, lign3, lign4, lign5, lign6, lign7, lign8, lign9, lign10, 
                                 lign11, lign12, lign13, lign14, lign15, lign16, lign17, lign18, lign19, lign20,
                                 lign21)))
@@ -472,55 +486,79 @@ tabDefOrder <- tabDef[order(tabDef$Nom),]
 
 choixTabHelp <- function(choix){
   
+  # tags$table(
+  # 
   ## DG======================================================================================================
-  if(choix == "DG_help"){
-    print("ok DG")
-    
-    tags$table(
-      for(i in 1:dim(tabDefOrder)[1]){
-        if (tabDefOrder$DG[i] == 1) {
-          tags$tr(
-            tags$th(tabDefOrder[i,1]),
-            tags$td(tabDefOrder[i,2])
-          )
-        }
-      }
-    )
-  } # fin DG
+    # if(choix == "DG_help"){
+    #   print("ok DG")
+    # 
+    #   for(i in 1:dim(tabDefOrder)[1]){
+    #     if (tabDefOrder$DG[i] == 1) {
+    #       print("tab help DG")
+    #       tags$tr(
+    #         tags$th(tabDefOrder$Nom[i]),
+    #           tags$td(tabDefOrder$Def[i])
+    #       )
+    #     }
+    #   }
+    # } # fin DG
   
-  ## DG======================================================================================================
-  else if(choix == "DR_help"){
-    print("ok DR")
-    
-    tags$table(
-      for(i in 1:dim(tabDefOrder)[1]){
-        if (tabDefOrder$DR_SFM[i] == 1 || tabDefOrder$DR_NFM[i] == 1 || tabDefOrder$DR_JFM[i] == 1 || tabDefOrder$DR_GJFM[i] == 1) {
-          tags$tr(
-            tags$th(tabDefOrder[i,1]),
-            tags$td(tabDefOrder[i,2])
-          )
-        }
-      }
-    )
-  }
+  ## DR======================================================================================================
+    # else if(choix == "DR_help"){
+    #   print("ok DR")
+    #   for(i in 1:dim(tabDefOrder)[1]){
+    #     if (tabDefOrder$DR_SFM[i] == 1 || tabDefOrder$DR_NFM[i] == 1 || tabDefOrder$DR_JFM[i] == 1 || tabDefOrder$DR_GJFM[i] == 1) {
+    #       tags$tr(
+    #         tags$th(tabDefOrder$Nom[i]),
+    #         tags$td(tabDefOrder$Def[i])
+    #       )
+    #     }
+    #   }
+    # } # fin DR
   
   ## BSD=====================================================================================================
-  else if(choix == "BSD_help"){
-    print("ok BSD")
-    
-    tags$table(
-      for(i in 1:dim(tabDefOrder)[1]){
-        if (tabDefOrder$BSD[i] == 1) {
-          tags$tr(
-            tags$th(tabDefOrder[i,1]),
-            tags$td(tabDefOrder[i,2])
-          )
-        }
-      }
-    )
+  #   else if(choix == "BSD_help"){
+  #     print("ok BSD")
+  #     
+  #     for(i in 1:dim(tabDefOrder)[1]){
+  #       if (tabDefOrder$BSD[i] == 1) {
+  #         tags$tr(
+  #           tags$th(tabDefOrder$Nom[i]),
+  #             tags$td(tabDefOrder$Def[i])
+  #         )
+  #       }
+  #     }
+  #   } # fin BSD
+  # ) # fin tag$table 
+  
+  
+  # Fonction pour générer les lignes de tableau
+  generate_rows <- function(indices) {
+    lapply(indices, function(i) {
+      tags$tr(
+        tags$th(tabDefOrder$Nom[i]),
+        tags$td(tabDefOrder$Def[i])
+      )
+    })
   }
-    
-    
+  
+  # Sélection des indices en fonction du choix
+  indices <- switch(choix,
+                    "DG_help" = which(tabDefOrder$DG == 1),
+                    "DR_help" = which(tabDefOrder$DR_SFM == 1 | tabDefOrder$DR_NFM == 1 | tabDefOrder$DR_JFM == 1 | tabDefOrder$DR_GJFM == 1),
+                    "BSD_help" = which(tabDefOrder$BSD == 1),
+                    integer(0) # valeur par défaut si le choix n'est pas valide
+  )
+  
+  # Génération des lignes
+  rows <- generate_rows(indices)
+  
+  # Création du tableau
+  tags$table(
+    do.call(tags$tbody, rows)
+  ) 
+  
+  
 } # fin choixTabHelp
 
 
