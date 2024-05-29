@@ -7,9 +7,12 @@
   Build in the file \helpTab\helpTab.R
 
 ## Tests
-  DG testing in   \tests_fonctions\test_AddFM.R
-  DR testing in   \tests_fonctions\test_SFM.R
-                  \tests_fonctions\test_NFM.R
-                  \tests_fonctions\test_JFM.R
-                  \tests_fonctions\test_GJFM.R
-  BSD testing in  \tests_fonctions\<coming soon>
+  1. DG testing in
+      - \tests_fonctions\test_AddFM.R
+  2. DR testing in :
+      - \tests_fonctions\test_SFM.R
+      - \tests_fonctions\test_NFM.R
+      - \tests_fonctions\test_JFM.R
+      - \tests_fonctions\test_GJFM.R
+  3. BSD testing in
+      - \tests_fonctions\<coming soon>
