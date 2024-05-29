@@ -4,7 +4,7 @@
   Launch the app form the ui.R or server.R file.
 
 ## Help tables 
-  build in the file \helpTab\helpTab.R
+  Build in the file \helpTab\helpTab.R
 
 ## Tests
   DG testing in   \tests_fonctions\test_AddFM.R
