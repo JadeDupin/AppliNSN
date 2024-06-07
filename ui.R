@@ -112,10 +112,6 @@ dashboardPage(
     
     #inclusion du css
     includeCSS("www/styles.css"),
-    # tags$head(
-    #   ## Import du style avec un CSS externe ##
-    #   tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
-    # ),
     
     tabItems(
 ##----------------------------------------------------------------------------------------------------------#
@@ -343,7 +339,10 @@ dashboardPage(
               
             tags$br(),
             
-            choixTabHelp("DG_help")
+            div(
+              id="DG_tab_help",
+              choixTabHelp("DG_help")
+            )
           )
         )
       ),
@@ -515,7 +514,10 @@ dashboardPage(
               
             tags$br(),
             
-            choixTabHelp("DG_help")
+            div(
+              id="DG_tab_help",
+              choixTabHelp("DG_help")
+            )
           )
         )
       ),
@@ -540,7 +542,10 @@ dashboardPage(
               
               tags$br(),
               
-              choixTabHelp("BSD_help")
+              div(
+                id="BSD_tab_help",
+                choixTabHelp("BSD_help")
+              )
             )
           )
       ),
@@ -579,23 +584,18 @@ dashboardPage(
                 id = "DR_SFM_puiss_data_sujets_FR",
               
                 column(width = 3, 
-                       numericInput("DR_SFM_puiss_nbr_groupe", "Number of groups", 10)
-                ),
+                       numericInput("DR_SFM_puiss_nbr_groupe", "Number of patients", 200)),
                 
                 column(width = 3,
                        selectInput("DR_SFM_puiss_type_data", "Data type",
-                                   c("rec_event",  "grouped"))
-                ),
+                                   c("rec_event"))),
                 
                 column(width = 3,
                        selectInput("DR_SFM_puiss_repartition_events", "Distribution of events",
-                                   c("Fixed",  "Uniform", "Poisson")),
-                       
-                ),
+                                   c("Fixed",  "Uniform", "Poisson"))),
                 
                 column(width = 3, 
-                       numericInput("DR_SFM_puiss_ratio", "Ratio", 1)
-                )
+                       numericInput("DR_SFM_puiss_ratio", "Ratio", 1))
               ),
               
               fluidRow(
@@ -608,12 +608,12 @@ dashboardPage(
                 column(width = 3,
                   conditionalPanel(
                     condition = "input.DR_SFM_puiss_repartition_events == 'Fixed' || input.DR_SFM_puiss_repartition_events == 'Poisson'",
-                    numericInput("DR_SFM_puiss_nbr_events_par_grp", "Number of expected events per group", 15)),
+                    numericInput("DR_SFM_puiss_nbr_events_par_grp", "Number of expected events", 15)),
                   
                   conditionalPanel(
                     condition = "input.DR_SFM_puiss_repartition_events == 'Uniform'",
-                    numericInput("DR_SFM_puiss_nbr_events_par_grp_unif_a", "Parameter a of a uniform distribution", 1),
-                    numericInput("DR_SFM_puiss_nbr_events_par_grp_unif_b", "Parameter b of a uniform distribution", 5))
+                    numericInput("DR_SFM_puiss_nbr_events_par_grp_unif_a", "Parameter a of a uniform distribution", 5),
+                    numericInput("DR_SFM_puiss_nbr_events_par_grp_unif_b", "Parameter b of a uniform distribution", 15))
                 ),
                 
                 column(width = 3)
@@ -685,15 +685,15 @@ dashboardPage(
                     condition = "input.DR_SFM_puiss_distrib_death == 'Uniform'",
                     fluidRow(
                       column(width = 6,
-                             numericInput("DR_SFM_puiss_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 1)),
+                             numericInput("DR_SFM_puiss_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 5)),
                       column(width = 6,
-                              numericInput("DR_SFM_puiss_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 5))
+                              numericInput("DR_SFM_puiss_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 8))
                     )
                   ),
                   
                   conditionalPanel(
                     condition = "input.DR_SFM_puiss_distrib_death == 'Exponential'",
-                    numericInput("DR_SFM_puiss_cencor_time_death", "Censor time for death", 15)
+                    numericInput("DR_SFM_puiss_cencor_time_death", "Censor time for death (parameter λ)", 15)
                   ),
                   
                   tags$br(),
@@ -709,7 +709,7 @@ dashboardPage(
                   
                   numericInput("DR_SFM_puiss_param_weibull", "Shape parameter of Weibull", 1),
                   
-                  numericInput("DR_SFM_puiss_theta", "Variability of the baseline risk at the cluster level", 0.25)
+                  numericInput("DR_SFM_puiss_theta", "Variability of the baseline risk at the individual level", 0.25)
                 )
               )
             ),
@@ -763,12 +763,12 @@ dashboardPage(
                 id = "DR_NFM_puiss_data_sujets_FR",
                 
                 column(width = 3, 
-                       numericInput("DR_NFM_puiss_nbr_groupe", "Number of groups", 40)
+                       numericInput("DR_NFM_puiss_nbr_groupe", "Number of patients", 50)
                 ),
                 
                 column(width = 3,
                        selectInput("DR_NFM_puiss_type_data", "Data type",
-                                   c("rec_event1", "rec_event2", "grouped"))
+                                   c("rec_event1", "rec_event2"))
                 ),
                 
                 column(width = 3,
@@ -881,15 +881,15 @@ dashboardPage(
                     condition = "input.DR_NFM_puiss_distrib_death == 'Uniform'",
                     fluidRow(
                       column(width = 6,
-                             numericInput("DR_NFM_puiss_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 1)),
+                             numericInput("DR_NFM_puiss_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 5)),
                       column(width = 6,
-                             numericInput("DR_NFM_puiss_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 5))
+                             numericInput("DR_NFM_puiss_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 8))
                     )
                   ),
                   
                   conditionalPanel(
                     condition = "input.DR_NFM_puiss_distrib_death == 'Exponential'",
-                    numericInput("DR_NFM_puiss_cencor_time_death", "Censor time for death", 5)),
+                    numericInput("DR_NFM_puiss_cencor_time_death", "Censor time for death (parameter λ)", 5)),
                   
                   tags$br(),
                   tags$br(),
@@ -964,7 +964,7 @@ dashboardPage(
                 id = "DR_JFM_puiss_data_sujets_FR",
                 
                 column(width = 4, 
-                       numericInput("DR_JFM_puiss_nbr_groupe", "Number of groups", 10)
+                       numericInput("DR_JFM_puiss_nbr_groupe", "Number of groups", 20)
                 ),
                 
                 column(width = 4,
@@ -986,7 +986,7 @@ dashboardPage(
                 column(width = 4,
                        conditionalPanel(
                          condition = "input.DR_JFM_puiss_repartition_events == 'Maximum' || input.DR_JFM_puiss_repartition_events == 'Poisson'",
-                         numericInput("DR_JFM_puiss_nbr_events_par_grp", "Number of expected events per patient", 15)),
+                         numericInput("DR_JFM_puiss_nbr_events_par_grp", "Number of expected events per patient", 5)),
                        
                        conditionalPanel(
                          condition = "input.DR_JFM_puiss_repartition_events == 'Uniform'",
@@ -1032,7 +1032,7 @@ dashboardPage(
                 
                 tags$br(),
                 
-                h4("Betas", id = "sous_titre_sous_partie"),
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="DR_JFM_puiss_test_beta",
@@ -1086,7 +1086,7 @@ dashboardPage(
                            numericInput("DR_JFM_puiss_median_rec_h0", "Median time of recurrent events under H0", 10)),
                   
                     column(width = 6,
-                           numericInput("DR_JFM_puiss_median_term_h0", "Median time of terminal events under H0", 12))
+                           numericInput("DR_JFM_puiss_median_term_h0", "Median time of terminal events under H0", 20))
                   ),
                   
                   tags$br(),
@@ -1100,7 +1100,7 @@ dashboardPage(
                            numericInput("DR_JFM_puiss_weibullD", "Shape parameter of Weibull for terminal events", 1))
                   ),
                   
-                  numericInput("DR_JFM_puiss_theta", "Variability of the baseline risk at the cluster level", 0.25),
+                  numericInput("DR_JFM_puiss_theta", "Dependence between recurrent and terminal events", 0.05),
                   
                   numericInput("DR_JFM_puiss_alpha", "Association between recurrent and terminal events", 0)
                 )
@@ -1156,7 +1156,7 @@ dashboardPage(
                 id = "DR_GJFM_puiss_data_sujets_FR",
                 
                 column(width = 4, 
-                       numericInput("DR_GJFM_puiss_nbr_groupe", "Number of groups", 10)
+                       numericInput("DR_GJFM_puiss_nbr_groupe", "Number of groups", 20)
                 ),
                 
                 column(width = 4,
@@ -1178,7 +1178,7 @@ dashboardPage(
                 column(width = 4,
                        conditionalPanel(
                          condition = "input.DR_GJFM_puiss_repartition_events == 'Maximum' || input.DR_GJFM_puiss_repartition_events == 'Poisson'",
-                         numericInput("DR_GJFM_puiss_nbr_events_par_grp", "Number of expected events per patient", 15)),
+                         numericInput("DR_GJFM_puiss_nbr_events_par_grp", "Number of expected events per patient", 5)),
                        
                        conditionalPanel(
                          condition = "input.DR_GJFM_puiss_repartition_events == 'Uniform'",
@@ -1224,7 +1224,7 @@ dashboardPage(
                 
                 tags$br(),
                 
-                h4("Betas", id = "sous_titre_sous_partie"),
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="DR_GJFM_puiss_test_beta",
@@ -1278,7 +1278,7 @@ dashboardPage(
                            numericInput("DR_GJFM_puiss_median_rec_h0", "Median time of recurrent events under H0", 10)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_puiss_median_term_h0", "Median time of terminal events under H0", 12))
+                           numericInput("DR_GJFM_puiss_median_term_h0", "Median time of terminal events under H0", 25))
                   ),
                   
                   tags$br(),
@@ -1292,9 +1292,9 @@ dashboardPage(
                            numericInput("DR_GJFM_puiss_weibullD", "Shape parameter of Weibull for terminal events", 1))
                   ),
                   
-                  numericInput("DR_GJFM_puiss_theta", "Variability of the baseline risk at the cluster level", 0.25),
+                  numericInput("DR_GJFM_puiss_theta", "Variability of the baseline risk at the cluster level", 0.05),
                   
-                  numericInput("DR_GJFM_puiss_eta", "Variance of inter-recurrence", 0.1)
+                  numericInput("DR_GJFM_puiss_eta", "Variance of inter-recurrence", 0.01)
                 )
               )
             ),
@@ -1334,7 +1334,10 @@ dashboardPage(
               
             tags$br(),
             
-            choixTabHelp("DR_help")
+            div(
+              id="DR_tab_help",
+              choixTabHelp("DR_help")
+            )
           )
         )
       ), 
@@ -1370,7 +1373,7 @@ dashboardPage(
                 
                 column(width = 4,
                        selectInput("DR_SFM_NSN_type_data", "Data type",
-                                   c("rec_event",  "grouped"))
+                                   c("rec_event"))
                 ),
                 
                 column(width = 4,
@@ -1392,7 +1395,7 @@ dashboardPage(
                 column(width = 4,
                        conditionalPanel(
                          condition = "input.DR_SFM_NSN_repartition_events == 'Fixed' || input.DR_SFM_NSN_repartition_events == 'Poisson'",
-                         numericInput("DR_SFM_NSN_nbr_events_par_grp", "Number of expected events per group", 15)),
+                         numericInput("DR_SFM_NSN_nbr_events_par_grp", "Number of expected events", 15)),
                        
                        conditionalPanel(
                          condition = "input.DR_SFM_NSN_repartition_events == 'Uniform'",
@@ -1471,14 +1474,14 @@ dashboardPage(
                     condition = "input.DR_SFM_NSN_distrib_death == 'Uniform'",
                     fluidRow(
                       column(width = 6,
-                             numericInput("DR_SFM_NSN_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 1)),
+                             numericInput("DR_SFM_NSN_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 5)),
                       column(width = 6,
-                             numericInput("DR_SFM_NSN_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 5))
+                             numericInput("DR_SFM_NSN_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 15))
                     )),
                   
                   conditionalPanel(
                     condition = "input.DR_SFM_NSN_distrib_death == 'Exponential'",
-                    numericInput("DR_SFM_NSN_cencor_time_death", "Censor time for death", 15)),
+                    numericInput("DR_SFM_NSN_cencor_time_death", "Censor time for death (parameter λ)", 15)),
                   
                   tags$br(),
                   tags$br(),
@@ -1493,7 +1496,7 @@ dashboardPage(
                   
                   numericInput("DR_SFM_NSN_param_weibull", "Shape parameter of Weibull", 1),
                   
-                  numericInput("DR_SFM_NSN_theta", "Variability of the baseline risk at the cluster level", 0.25)
+                  numericInput("DR_SFM_NSN_theta", "Variability of the baseline risk at the individual level", 0.25)
                 )
               )
             ),
@@ -1548,7 +1551,7 @@ dashboardPage(
                 
                 column(width = 3,
                        selectInput("DR_NFM_NSN_type_data", "Data type",
-                                   c("rec_event1", "rec_event2", "grouped"))
+                                   c("rec_event1", "rec_event2"))
                 ),
                 
                 column(width = 3, 
@@ -1665,14 +1668,14 @@ dashboardPage(
                     condition = "input.DR_NFM_NSN_distrib_death == 'Uniform'",
                     fluidRow(
                       column(width = 6,
-                             numericInput("DR_NFM_NSN_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 1)),
+                             numericInput("DR_NFM_NSN_cencor_time_death_unif_a", "Parameter a of a uniform distribution", 5)),
                       column(width = 6,
-                             numericInput("DR_NFM_NSN_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 5))
+                             numericInput("DR_NFM_NSN_cencor_time_death_unif_b", "Parameter b of a uniform distribution", 15))
                     )),
                   
                   conditionalPanel(
                     condition = "input.DR_NFM_NSN_distrib_death == 'Exponential'",
-                    numericInput("DR_NFM_NSN_cencor_time_death", "Censor time for death", 15)),
+                    numericInput("DR_NFM_NSN_cencor_time_death", "Censor time for death (parameter λ)", 15)),
                   
                   tags$br(),
                   tags$br(),
@@ -1755,7 +1758,7 @@ dashboardPage(
                 column(width = 4,
                        conditionalPanel(
                          condition = "input.DR_JFM_NSN_repartition_events == 'Maximum' || input.DR_JFM_NSN_repartition_events == 'Poisson'",
-                         numericInput("DR_JFM_NSN_nbr_events_par_grp", "Number of expected events per patient", 15)),
+                         numericInput("DR_JFM_NSN_nbr_events_par_grp", "Number of expected events per patient", 3)),
                        
                        conditionalPanel(
                          condition = "input.DR_JFM_NSN_repartition_events == 'Uniform'",
@@ -1805,7 +1808,7 @@ dashboardPage(
                 
                 tags$br(),
                 
-                h4("Betas", id = "sous_titre_sous_partie"),
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="DR_JFM_NSN_test_beta",
@@ -1859,7 +1862,7 @@ dashboardPage(
                            numericInput("DR_JFM_NSN_median_rec_h0", "Median time of recurrent events under H0", 10)),
                     
                     column(width = 6,
-                           numericInput("DR_JFM_NSN_median_term_h0", "Median time of terminal events under H0", 12))
+                           numericInput("DR_JFM_NSN_median_term_h0", "Median time of terminal events under H0", 15))
                   ),
                   
                   tags$br(),
@@ -1937,7 +1940,7 @@ dashboardPage(
                 column(width = 4,
                        conditionalPanel(
                          condition = "input.DR_GJFM_NSN_repartition_events == 'Maximum' || input.DR_GJFM_NSN_repartition_events == 'Poisson'",
-                         numericInput("DR_GJFM_NSN_nbr_events_par_grp", "Number of expected events per patient", 15)),
+                         numericInput("DR_GJFM_NSN_nbr_events_par_grp", "Number of expected events per patient", 3)),
                        
                        conditionalPanel(
                          condition = "input.DR_GJFM_NSN_repartition_events == 'Uniform'",
@@ -1987,7 +1990,7 @@ dashboardPage(
                 
                 tags$br(),
                 
-                h4("Betas", id = "sous_titre_sous_partie"),
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="DR_GJFM_NSN_test_beta",
@@ -2041,7 +2044,7 @@ dashboardPage(
                            numericInput("DR_GJFM_NSN_median_rec_h0", "Median time of recurrent events under H0", 10)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_NSN_median_term_h0", "Median time of terminal events under H0", 12))
+                           numericInput("DR_GJFM_NSN_median_term_h0", "Median time of terminal events under H0", 15))
                   ),
                   
                   tags$br(),
@@ -2097,7 +2100,10 @@ dashboardPage(
             
             tags$br(),
             
-            choixTabHelp("DR_help")
+            div(
+              id="DR_tab_help",
+              choixTabHelp("DR_help")
+            )
           )
         )
       )#end tabItem de données récurrentes

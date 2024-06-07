@@ -906,19 +906,11 @@
 
 
 /**** Tables d'aide ****/
-table { 
+#DG_tab_help, #DR_tab_help, #BSD_tab_help {
     margin: auto; 
     width: 80%;
-    border-collapse: collapse 
 }
 
-th, td { 
-    padding-top: 20px; 
-    padding-bottom: 20px; 
-    padding-left: 10px; 
-    border: 1px solid 
-}
-
-th { 
-    text-align: center 
+.bold-text {
+    font-weight: bold;
 }

@@ -2,6 +2,7 @@
 # Librairies-----------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------#
 library(shiny)
+library(DT)
 
 
 
@@ -10,251 +11,6 @@ library(shiny)
 ### DG NSN :        DG_NSN_help
 ### DR tous les modèles pr puissance et NSN : DR_puiss_NSN_help
 ### BSD :
-
-
-
-
-# # Fonction-------------------------------------------------------------------------------------------
-# choixTabHelp0 <- function(choix){
-#   
-#   ## DG puissance====================================================================================
-#   if(choix == "DG_puiss_help"){
-#     tags$table(
-#       
-#       tags$tr(
-#         tags$th("Bootstrap"),
-#         tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Correlation between both random effects"),
-#         tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Distribution of patient by groupe"),
-#         tags$td("Distribution of subjects within groups :
-#                             - Fixed: fixed number of subjects for each group
-#                             - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Follow-up period"),
-#         tags$td("Duration of follow-up (same unit as the median).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Hazard Ratio (HR)"),
-#         tags$td("the hazard ratio or ratio of median survival times.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Inclusion period"),
-#         tags$td("Period allocated to patient inclusion (same unit as the median).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Median survival time under H0"),
-#         tags$td("The survival median under null hypothesis.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of bootstrap resamples"),
-#         tags$td("Default 1000.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of groups"),
-#         tags$td("Number of groups to calculate test power. Performs power estimation, when specified.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of Monte Carlo runs"),
-#         tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of subjects per group"),
-#         tags$td("Number of patients expected in each group.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Ratio"),
-#         tags$td("Randomization ratio in favor of the experimental arm. Default value is 1.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Seed"),
-#         tags$td("Seed for reproducing estimates.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Shape parameter of Weibull"),
-#         tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Statistic"),
-#         tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type I error"),
-#         tags$td("Type I error rate or significance level. Default 0.05.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type of follow-up"),
-#         tags$td("Defines how patients are monitored:
-#                             - UptoEnd: from inclusion to end of study
-#                             - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type of test"),
-#         tags$td("Allows to specify the direction of the test:
-#                             - 2-sided for two-sided 
-#                             - 1-sided for unilateral")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Variance of treatment effect"),
-#         tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Variance of the baseline risk"),
-#         tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
-#       )
-#     )
-#   }
-#   
-#   ## DG NSN==========================================================================================
-#   else if(choix == "DG_NSN_help"){
-#     tags$table(
-#       
-#       tags$tr(
-#         tags$th("Bootstrap"),
-#         tags$td("Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Correlation between both random effects"),
-#         tags$td("Correlation coefficient between the two fragilities. Default value is 0.5.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Distribution by groupe"),
-#         tags$td("Distribution of subjects within groups :
-#                             - Fixed: fixed number of subjects for each group
-#                             - Unif: distribution of subjects according to a uniform distribution of parameters a and b")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Follow-up period"),
-#         tags$td("Duration of follow-up (same unit as the median).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Hazard Ratio (HR)"),
-#         tags$td("the hazard ratio or ratio of median survival times.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Inclusion period"),
-#         tags$td("Period allocated to patient inclusion (same unit as the median).")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Median survival time under H0"),
-#         tags$td("The survival median under null hypothesis.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of bootstrap resamples"),
-#         tags$td("Default 1000.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of Monte Carlo runs"),
-#         tags$td("Number of runs launched to approximate the Fisher matrix by simulations.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Number of subjects per group"),
-#         tags$td("Number of patients expected in each group.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Power"),
-#         tags$td("The probability of detecting the predefined significant effect (HR) and is defined as 1-type II error.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Ratio"),
-#         tags$td("andomization ratio in favor of the experimental arm. Default value is 1.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Seed"),
-#         tags$td("Seed for reproducing estimates.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Shape parameter of Weibull"),
-#         tags$td("Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Statistic"),
-#         tags$td("The test used to evaluate whether there is a significant clinical effect between treatment arms")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type I error"),
-#         tags$td("Type I error rate or significance level. Default 0.05.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type of follow-up"),
-#         tags$td("Defines how patients are monitored:
-#                             - UptoEnd: from inclusion to end of study
-#                             - Fixed: each patient is followed for the same length of time, regardless of inclusion date")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Type of test"),
-#         tags$td("Allows to specify the direction of the test:
-#                             - 2-sided for two-sided 
-#                             - 1-sided for unilateral")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Variance of treatment effect"),
-#         tags$td("Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.")
-#       ),
-#       
-#       tags$tr(
-#         tags$th("Variance of the baseline risk"),
-#         tags$td("Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.")
-#       )
-#     )
-#   }
-#   
-#   ## DR NSN==========================================================================================
-#   else if(choix == "DR_puiss_NSN_help"){
-#     tags$table(
-#       
-#       tags$tr(
-#         tags$th("NAME"),
-#         tags$td("DEF")
-#       )
-#     )
-#   }
-# }
-
-
-
 
 
 
@@ -289,8 +45,8 @@ lign2 <- c("Correlation between both random effects",
 
 lign3 <- c("Distribution of patient by groupe", 
            "Distribution of subjects within groups :
-            \n      - Fixed: fixed number of subjects for each group
-            \n      - Unif: distribution of subjects according to a uniform distribution of parameters a and b",
+            <br>      - Fixed: fixed number of subjects for each group
+            <br>      - Unif: distribution of subjects according to a uniform distribution of parameters a and b",
            1, 
            0, 
            0, 
@@ -328,8 +84,8 @@ lign6 <- c("Inclusion period",
 lign7 <- c("Median survival time under H0", 
            "The survival median under null hypothesis",
            1, 
-           0, 
-           0, 
+           1, 
+           1, 
            0, 
            0,
            0)
@@ -346,8 +102,8 @@ lign8 <- c("Number of bootstrap resamples",
 lign9 <- c("Number of groups", 
            "Number of groups to calculate test power. Performs power estimation, when specified.",
            1, 
-           1, 
-           1, 
+           0, 
+           0, 
            1, 
            1,
            0)
@@ -417,8 +173,8 @@ lign16 <- c("Type I error",
 
 lign17 <- c("Type of follow-up", 
             "Defines how patients are monitored: 
-             \n     - UptoEnd: from inclusion to end of study 
-             \n     - Fixed: each patient is followed for the same length of time, regardless of inclusion date",
+             <br>     - UptoEnd: from inclusion to end of study 
+             <br>     - Fixed: each patient is followed for the same length of time, regardless of inclusion date",
             1, 
             1, 
             1, 
@@ -428,8 +184,8 @@ lign17 <- c("Type of follow-up",
 
 lign18 <- c("Type of test",
             "Allows to specify the direction of the test: 
-             \n     - 2-sided for two-sided   
-             \n     - 1-sided for unilateral",
+             <br>     - 2-sided for two-sided   
+             <br>     - 1-sided for unilateral",
             1, 
             1, 
             1, 
@@ -464,14 +220,239 @@ lign21 <- c("Power",
             1,
             0)
 
+lign22 <- c("Data type",
+            "Type of data considered; can be either 'rec_event1', 'rec_event2' or 'grouped':
+            <br>          - rec_event: corresponds to a patient experiencing recurrent events
+            <br>          - grouped: corresponds to patients  included in a cluster",
+            0,
+            1,
+            1,
+            0,
+            0,
+            0)
+
+lign23 <- c("Distribution of events",
+            "Distribution of the number of expected event, can be either : 
+            <br>      - Fixed/Maximum: fixed number of subjects for each group
+            <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
+            <br>      - Poisson: distrubution according to the average of realisations",
+            0,
+            1,
+            1,
+            1,
+            1,
+            0)
+
+lign24 <- c("Number of expected events",
+            "Number of expected events per subgroup or per patient. 
+            <br>      - Fixed/Maximum: correspond to a scalar
+            <br>      - Uniform: 2 numbers to enter
+            <br>      - Poisson: correspond to a scalar",
+            0,
+            1,
+            1,
+            1,
+            1,
+            0)
+
+lign25 <- c("Distribution of subgroups",
+            "Distribution of subgroups considered for:
+            <br>      - Fixed: fixed number of subjects for each group
+            <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
+            <br>      - Poisson: distrubution according to the average of realisations",
+            0,
+            0,
+            1,
+            0,
+            0,
+            0)
+
+lign26 <- c("Timescale",
+            "Only gap time is implemented",
+            0,
+            1,
+            1,
+            1,
+            1,
+            0)
+
+lign27 <- c("Median time of recurrente event under H0", 
+           "Expected median survival time of recurrent events under H0",
+           0, 
+           0, 
+           0, 
+           1, 
+           1,
+           0)
+
+lign28 <- c("Median time of terminal event under H0", 
+            "Expected median survival time of terminal events under H0",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign29 <- c("Shape parameter of Weibull for recurrent events",
+            "Shape parameter of baseline risks of the Weibull distribution for recurrent events. Defaults to 1, assuming exponentially distributed survival times.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign30 <- c("Shape parameter of Weibull for terminal events",
+            "Shape parameter of baseline risks of the Weibull distribution for terminal events. Defaults to 1, assuming exponentially distributed survival times.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign31 <- c("Variability of the baseline risk at the individual level",
+            "Variability of the baseline risk at the individual level",
+            0, 
+            1, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign32 <- c("Variability of the baseline risk at the cluster level",
+            "Variability of the baseline risk at the cluster level",
+            0, 
+            0, 
+            1, 
+            0, 
+            0,
+            0)
+
+lign33 <- c("Variability of the baseline risk at the subcluster level",
+            "Variability of the baseline risk at the subcluster level",
+            0, 
+            0, 
+            1, 
+            0, 
+            0,
+            0)
+
+lign34 <- c("Variance of inter-recurrence",
+            "Within-subject dependence between recurrent times",
+            0, 
+            0, 
+            0, 
+            0, 
+            1,
+            0)
+
+lign35 <- c("Association between recurrent and terminal events",
+            "Association parameter between recurrent and terminal events",
+            0, 
+            0, 
+            0, 
+            1, 
+            0,
+            0)
+
+lign36 <- c("Number of patients", 
+           "Number of patients to calculate test power. Performs power estimation, when specified.",
+           0, 
+           1, 
+           1, 
+           0, 
+           0,
+           0)
+
+lign37 <- c("Distribution of death", 
+            "Distribution of death times, can be either:
+            <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
+            <br>      - Exponential: distribution of subject according to a exponential distribution of parameter lambda",
+            0, 
+            1, 
+            1, 
+            0, 
+            0,
+            0)
+
+lign38 <- c("Censor time for death", 
+            "Adding a censor time for death. Parameter required for death_type.",
+            0, 
+            1, 
+            1, 
+            0, 
+            0,
+            0)
+
+lign39 <- c("Method", 
+            "Can be either 'joint', 'betaRtest', or 'betaDtest' to estimate power when testing.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign40 <- c("Beta values for recurrent events under H0 (logarithm of)", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under H0.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign41 <- c("Beta values for recurrent events under HA (logarithm of)", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under HA.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign42 <- c("Beta values for terminal events under H0 (logarithm of)", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under H0.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign43 <- c("Beta values for terminal events under HA (logarithm of)", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under HA.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign44 <- c("Dependence between recurrent and terminal events", 
+            "Dependence parameter between recurrent and terminal events",
+            0, 
+            0, 
+            0, 
+            1, 
+            0,
+            0)
+
+
+
+
 
 #Création de la table 
 tabDef <- data.frame(do.call("rbind", list(lign1, lign2, lign3, lign4, lign5, lign6, lign7, lign8, lign9, lign10, 
                                 lign11, lign12, lign13, lign14, lign15, lign16, lign17, lign18, lign19, lign20,
-                                lign21)))
+                                lign21, lign22, lign23, lign24, lign25, lign26, lign27, lign28, lign29, lign30, 
+                                lign31, lign32, lign33, lign34, lign35, lign36, lign37, lign38, lign39, lign40, 
+                                lign41, lign42, lign43, lign44)))
 
 colnames(tabDef) <- c("Nom",
-                      "Def", 
+                      "Definition", 
                       "DG", 
                       "DR_SFM", 
                       "DR_NFM", 
@@ -486,31 +467,40 @@ tabDefOrder <- tabDef[order(tabDef$Nom),]
 
 choixTabHelp <- function(choix){
   
-  # Fonction pour générer les lignes de tableau
-  generate_rows <- function(indices) {
-    lapply(indices, function(i) {
-      tags$tr(
-        tags$th(tabDefOrder$Nom[i]),
-        tags$td(tabDefOrder$Def[i])
-      )
-    })
-  }
   
-  # Sélection des indices en fonction du choix
-  indices <- switch(choix,
-                    "DG_help" = which(tabDefOrder$DG == 1),
-                    "DR_help" = which(tabDefOrder$DR_SFM == 1 | tabDefOrder$DR_NFM == 1 | tabDefOrder$DR_JFM == 1 | tabDefOrder$DR_GJFM == 1),
-                    "BSD_help" = which(tabDefOrder$BSD == 1),
-                    integer(0) # valeur par défaut si le choix n'est pas valide
+  # Filtrer les données en fonction du choix
+  filtered_data <- switch(choix,
+                    "DG_help" = tabDefOrder[tabDefOrder$DG == 1, ],
+                    "DR_help" = tabDefOrder[tabDefOrder$DR_SFM == 1 | tabDefOrder$DR_NFM == 1 | tabDefOrder$DR_JFM == 1 | tabDefOrder$DR_GJFM == 1, ],
+                    "BSD_help" = tabDefOrder[tabDefOrder$BSD == 1, ],
+                    data.frame()
   )
   
-  # Génération des lignes
-  rows <- generate_rows(indices)
   
-  # Création du tableau
-  tags$table(
-    do.call(tags$tbody, rows)
-  ) 
+  # Replace <br> tags with HTML line breaks
+  filtered_data$Definition <- gsub("<br>", "<br/>", filtered_data$Definition)
+  
+  #Tableau interactif
+  datatable(filtered_data,
+            escape = FALSE, # Prevent escaping HTML
+            options = list(lengthChange = FALSE, # Disable entries option
+                           searching = FALSE, # Disable search
+                           pageLength = dim(filtered_data)[1],
+                           #scrollX = TRUE,
+                           #scrollY = TRUE,
+                           autoWidth = TRUE,
+                           server = FALSE,
+                           dom = 'ftp',
+                           columnDefs = list(list(targets = '_all', className = 'dt-center'),
+                                             list(targets = c(2:7), visible = FALSE)) # hide column 3 to 8
+            ),
+            selection = 'single',
+            filter = 'top',
+            rownames = FALSE
+  )  %>% formatStyle(
+    columns = "Nom",
+    className = "bold-text" # Apply CSS class to column
+  )
   
   
 } # fin choixTabHelp
