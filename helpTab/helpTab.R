@@ -25,8 +25,8 @@ library(DT)
 #                         "DR_GJFM (1/0)", 
 #                         "BSD     (1/0)"
 
-lign1 <- c("Bootstrap",  
-           "Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. Default value is FALSE (box unchecked).",
+lign1 <- c("<div class='bold-text'>Bootstrap</div>",  
+           "Logical parameter for running a Bootstrap method to calculate the confidence interval for power estimates. <br>Default value is FALSE (box unchecked).",
            1, 
            0, 
            0, 
@@ -34,8 +34,8 @@ lign1 <- c("Bootstrap",
            0,
            0)
 
-lign2 <- c("Correlation between both random effects", 
-           "Correlation coefficient between the two fragilities. Default value is 0.5.",
+lign2 <- c("<div class='bold-text'>Correlation between both random effects</div>", 
+           "Correlation coefficient between the two fragilities. <br>Default value is 0.5.",
            1, 
            0, 
            0, 
@@ -43,7 +43,7 @@ lign2 <- c("Correlation between both random effects",
            0,
            0)
 
-lign3 <- c("Distribution of patient by groupe", 
+lign3 <- c("<div class='bold-text'>Distribution of patient by groupe</div>", 
            "Distribution of subjects within groups :
             <br>      - Fixed: fixed number of subjects for each group
             <br>      - Unif: distribution of subjects according to a uniform distribution of parameters a and b",
@@ -54,7 +54,7 @@ lign3 <- c("Distribution of patient by groupe",
            0,
            0)
 
-lign4 <- c("Follow-up period",
+lign4 <- c("<div class='bold-text'>Follow-up period</div>",
            "Duration of follow-up (same unit as the median)",
            1, 
            1, 
@@ -63,7 +63,7 @@ lign4 <- c("Follow-up period",
            1,
            0)
 
-lign5 <- c("Hazard Ratio (HR)", 
+lign5 <- c("<div class='bold-text'>Hazard Ratio (HR)</div>", 
            "Hazard ratio or ratio of median survival times",
            1, 
            0, 
@@ -72,7 +72,7 @@ lign5 <- c("Hazard Ratio (HR)",
            0,
            0)
 
-lign6 <- c("Inclusion period", 
+lign6 <- c("<div class='bold-text'>Inclusion period</div>", 
            "Period allocated to patient inclusion (same unit as the median)",
            1, 
            1, 
@@ -81,7 +81,7 @@ lign6 <- c("Inclusion period",
            1,
            0)
 
-lign7 <- c("Median survival time under H0", 
+lign7 <- c("<div class='bold-text'>Median survival time under H0</div>", 
            "The survival median under null hypothesis",
            1, 
            1, 
@@ -90,7 +90,7 @@ lign7 <- c("Median survival time under H0",
            0,
            0)
 
-lign8 <- c("Number of bootstrap resamples", 
+lign8 <- c("<div class='bold-text'>Number of bootstrap resamples</div>", 
            "Default 1000",
            1, 
            0, 
@@ -99,8 +99,8 @@ lign8 <- c("Number of bootstrap resamples",
            0,
            0)
 
-lign9 <- c("Number of groups", 
-           "Number of groups to calculate test power. Performs power estimation, when specified.",
+lign9 <- c("<div class='bold-text'>Number of groups</div>", 
+           "Number of groups to calculate test power. <br>Performs power estimation, when specified.",
            1, 
            0, 
            0, 
@@ -108,7 +108,7 @@ lign9 <- c("Number of groups",
            1,
            0)
 
-lign10 <- c("Number of Monte Carlo runs",
+lign10 <- c("<div class='bold-text'>Number of Monte Carlo runs</div>",
             "Number of runs launched to approximate the Fisher matrix by simulations",
             1, 
             1, 
@@ -117,7 +117,7 @@ lign10 <- c("Number of Monte Carlo runs",
             1,
             0)
 
-lign11 <- c("Number of subjects per group", 
+lign11 <- c("<div class='bold-text'>Number of subjects per group</div>", 
             "Number of patients expected in each group",
             1, 
             0, 
@@ -126,8 +126,8 @@ lign11 <- c("Number of subjects per group",
             0,
             0)
 
-lign12 <- c("Ratio", 
-            "Randomization ratio in favor of the experimental arm. Default value is 1.",
+lign12 <- c("<div class='bold-text'>Ratio</div>", 
+            "Randomization ratio in favor of the experimental arm. <br>Default value is 1.",
             1, 
             1, 
             1, 
@@ -135,7 +135,7 @@ lign12 <- c("Ratio",
             1,
             0)
 
-lign13 <- c("Seed",
+lign13 <- c("<div class='bold-text'>Seed</div>",
             "Seed for reproducing estimates",
             1, 
             1, 
@@ -144,7 +144,7 @@ lign13 <- c("Seed",
             1,
             0)
 
-lign14 <- c("Shape parameter of Weibull",
+lign14 <- c("<div class='bold-text'>Shape parameter of Weibull</div>",
             "Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.",
             1, 
             1, 
@@ -153,7 +153,7 @@ lign14 <- c("Shape parameter of Weibull",
             0,
             0)
 
-lign15 <- c("Statistic",
+lign15 <- c("<div class='bold-text'>Statistic</div>",
             "The test used to evaluate whether there is a significant clinical effect between treatment arms",
             1, 
             1, 
@@ -162,7 +162,7 @@ lign15 <- c("Statistic",
             1,
             0)
 
-lign16 <- c("Type I error",
+lign16 <- c("<div class='bold-text'>Type I error</div>",
             "Type I error rate or significance level. Default 0.05.",
             1, 
             1, 
@@ -171,7 +171,7 @@ lign16 <- c("Type I error",
             1,
             0)
 
-lign17 <- c("Type of follow-up", 
+lign17 <- c("<div class='bold-text'>Type of follow-up</div>", 
             "Defines how patients are monitored: 
              <br>     - UptoEnd: from inclusion to end of study 
              <br>     - Fixed: each patient is followed for the same length of time, regardless of inclusion date",
@@ -182,7 +182,7 @@ lign17 <- c("Type of follow-up",
             1,
             0)
 
-lign18 <- c("Type of test",
+lign18 <- c("<div class='bold-text'>Type of test</div>",
             "Allows to specify the direction of the test: 
              <br>     - 2-sided for two-sided   
              <br>     - 1-sided for unilateral",
@@ -193,8 +193,8 @@ lign18 <- c("Type of test",
             1,
             0)
 
-lign19 <- c("Variance of treatment effect",
-            "Variance of random slope (random effect associated with treatment effect between groups). Default value is 0.1.",
+lign19 <- c("<div class='bold-text'>Variance of treatment effect</div>",
+            "Variance of random slope (random effect associated with treatment effect between groups). <br>Default value is 0.1.",
             1,
             0,
             0,
@@ -202,8 +202,8 @@ lign19 <- c("Variance of treatment effect",
             0,
             0)
 
-lign20 <- c("Variance of the baseline risk",
-            "Random intercept variance (random effect associated with the basis risk function). Default value is 0.1.",
+lign20 <- c("<div class='bold-text'>Variance of the baseline risk</div>",
+            "Random intercept variance (random effect associated with the basis risk function). <br>Default value is 0.1.",
             1,
             0,
             0,
@@ -211,7 +211,7 @@ lign20 <- c("Variance of the baseline risk",
             0,
             0)
 
-lign21 <- c("Power",
+lign21 <- c("<div class='bold-text'>Power</div>",
             "The probability of detecting the predefined significant effect (HR) and is defined as 1-type II error.",
             1, 
             1, 
@@ -220,7 +220,7 @@ lign21 <- c("Power",
             1,
             0)
 
-lign22 <- c("Data type",
+lign22 <- c("<div class='bold-text'>Data type</div>",
             "Type of data considered; can be either 'rec_event1', 'rec_event2' or 'grouped':
             <br>          - rec_event: corresponds to a patient experiencing recurrent events
             <br>          - grouped: corresponds to patients  included in a cluster",
@@ -231,7 +231,7 @@ lign22 <- c("Data type",
             0,
             0)
 
-lign23 <- c("Distribution of events",
+lign23 <- c("<div class='bold-text'>Distribution of events</div>",
             "Distribution of the number of expected event, can be either : 
             <br>      - Fixed/Maximum: fixed number of subjects for each group
             <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
@@ -243,7 +243,7 @@ lign23 <- c("Distribution of events",
             1,
             0)
 
-lign24 <- c("Number of expected events",
+lign24 <- c("<div class='bold-text'>Number of expected events</div>",
             "Number of expected events per subgroup or per patient. 
             <br>      - Fixed/Maximum: correspond to a scalar
             <br>      - Uniform: 2 numbers to enter
@@ -255,7 +255,7 @@ lign24 <- c("Number of expected events",
             1,
             0)
 
-lign25 <- c("Distribution of subgroups",
+lign25 <- c("<div class='bold-text'>Distribution of subgroups</div>",
             "Distribution of subgroups considered for:
             <br>      - Fixed: fixed number of subjects for each group
             <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
@@ -267,7 +267,7 @@ lign25 <- c("Distribution of subgroups",
             0,
             0)
 
-lign26 <- c("Timescale",
+lign26 <- c("<div class='bold-text'>Timescale</div>",
             "Only gap time is implemented",
             0,
             1,
@@ -276,7 +276,7 @@ lign26 <- c("Timescale",
             1,
             0)
 
-lign27 <- c("Median time of recurrente event under H0", 
+lign27 <- c("<div class='bold-text'>Median time of recurrente event under H0</div>", 
            "Expected median survival time of recurrent events under H0",
            0, 
            0, 
@@ -285,7 +285,7 @@ lign27 <- c("Median time of recurrente event under H0",
            1,
            0)
 
-lign28 <- c("Median time of terminal event under H0", 
+lign28 <- c("<div class='bold-text'>Median time of terminal event under H0</div>", 
             "Expected median survival time of terminal events under H0",
             0, 
             0, 
@@ -294,8 +294,8 @@ lign28 <- c("Median time of terminal event under H0",
             1,
             0)
 
-lign29 <- c("Shape parameter of Weibull for recurrent events",
-            "Shape parameter of baseline risks of the Weibull distribution for recurrent events. Defaults to 1, assuming exponentially distributed survival times.",
+lign29 <- c("<div class='bold-text'>Shape parameter of Weibull for recurrent events</div>",
+            "Shape parameter of baseline risks of the Weibull distribution for recurrent events. <br>Defaults to 1, assuming exponentially distributed survival times.",
             0, 
             0, 
             0, 
@@ -303,8 +303,8 @@ lign29 <- c("Shape parameter of Weibull for recurrent events",
             1,
             0)
 
-lign30 <- c("Shape parameter of Weibull for terminal events",
-            "Shape parameter of baseline risks of the Weibull distribution for terminal events. Defaults to 1, assuming exponentially distributed survival times.",
+lign30 <- c("<div class='bold-text'>Shape parameter of Weibull for terminal events</div>",
+            "Shape parameter of baseline risks of the Weibull distribution for terminal events. <br>Defaults to 1, assuming exponentially distributed survival times.",
             0, 
             0, 
             0, 
@@ -312,7 +312,7 @@ lign30 <- c("Shape parameter of Weibull for terminal events",
             1,
             0)
 
-lign31 <- c("Variability of the baseline risk at the individual level",
+lign31 <- c("<div class='bold-text'>Variability of the baseline risk at the individual level</div>",
             "Variability of the baseline risk at the individual level",
             0, 
             1, 
@@ -321,7 +321,7 @@ lign31 <- c("Variability of the baseline risk at the individual level",
             1,
             0)
 
-lign32 <- c("Variability of the baseline risk at the cluster level",
+lign32 <- c("<div class='bold-text'>Variability of the baseline risk at the cluster level</div>",
             "Variability of the baseline risk at the cluster level",
             0, 
             0, 
@@ -330,7 +330,7 @@ lign32 <- c("Variability of the baseline risk at the cluster level",
             0,
             0)
 
-lign33 <- c("Variability of the baseline risk at the subcluster level",
+lign33 <- c("<div class='bold-text'>Variability of the baseline risk at the subcluster level</div>",
             "Variability of the baseline risk at the subcluster level",
             0, 
             0, 
@@ -339,7 +339,7 @@ lign33 <- c("Variability of the baseline risk at the subcluster level",
             0,
             0)
 
-lign34 <- c("Variance of inter-recurrence",
+lign34 <- c("<div class='bold-text'>Variance of inter-recurrence</div>",
             "Within-subject dependence between recurrent times",
             0, 
             0, 
@@ -348,7 +348,7 @@ lign34 <- c("Variance of inter-recurrence",
             1,
             0)
 
-lign35 <- c("Association between recurrent and terminal events",
+lign35 <- c("<div class='bold-text'>Association between recurrent and terminal events</div>",
             "Association parameter between recurrent and terminal events",
             0, 
             0, 
@@ -357,7 +357,7 @@ lign35 <- c("Association between recurrent and terminal events",
             0,
             0)
 
-lign36 <- c("Number of patients", 
+lign36 <- c("<div class='bold-text'>Number of patients</div>", 
            "Number of patients to calculate test power. Performs power estimation, when specified.",
            0, 
            1, 
@@ -366,7 +366,7 @@ lign36 <- c("Number of patients",
            0,
            0)
 
-lign37 <- c("Distribution of death", 
+lign37 <- c("<div class='bold-text'>Distribution of death</div>", 
             "Distribution of death times, can be either:
             <br>      - Uniform: distribution of subjects according to a uniform distribution of parameters a and b
             <br>      - Exponential: distribution of subject according to a exponential distribution of parameter lambda",
@@ -377,7 +377,7 @@ lign37 <- c("Distribution of death",
             0,
             0)
 
-lign38 <- c("Censor time for death", 
+lign38 <- c("<div class='bold-text'>Censor time for death</div>", 
             "Adding a censor time for death. Parameter required for death_type.",
             0, 
             1, 
@@ -386,7 +386,7 @@ lign38 <- c("Censor time for death",
             0,
             0)
 
-lign39 <- c("Method", 
+lign39 <- c("<div class='bold-text'>Method</div>", 
             "Can be either 'joint', 'betaRtest', or 'betaDtest' to estimate power when testing.",
             0, 
             0, 
@@ -395,7 +395,7 @@ lign39 <- c("Method",
             1,
             0)
 
-lign40 <- c("Beta values for recurrent events under H0 (logarithm of)", 
+lign40 <- c("<div class='bold-text'>Beta values for recurrent events under H0 (logarithm of)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under H0.",
             0, 
             0, 
@@ -404,7 +404,7 @@ lign40 <- c("Beta values for recurrent events under H0 (logarithm of)",
             1,
             0)
 
-lign41 <- c("Beta values for recurrent events under HA (logarithm of)", 
+lign41 <- c("<div class='bold-text'>Beta values for recurrent events under HA (logarithm of)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under HA.",
             0, 
             0, 
@@ -413,7 +413,7 @@ lign41 <- c("Beta values for recurrent events under HA (logarithm of)",
             1,
             0)
 
-lign42 <- c("Beta values for terminal events under H0 (logarithm of)", 
+lign42 <- c("<div class='bold-text'>Beta values for terminal events under H0 (logarithm of)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under H0.",
             0, 
             0, 
@@ -422,7 +422,7 @@ lign42 <- c("Beta values for terminal events under H0 (logarithm of)",
             1,
             0)
 
-lign43 <- c("Beta values for terminal events under HA (logarithm of)", 
+lign43 <- c("<div class='bold-text'>Beta values for terminal events under HA (logarithm of)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under HA.",
             0, 
             0, 
@@ -431,7 +431,7 @@ lign43 <- c("Beta values for terminal events under HA (logarithm of)",
             1,
             0)
 
-lign44 <- c("Dependence between recurrent and terminal events", 
+lign44 <- c("<div class='bold-text'>Dependence between recurrent and terminal events</div>", 
             "Dependence parameter between recurrent and terminal events",
             0, 
             0, 
@@ -478,7 +478,10 @@ choixTabHelp <- function(choix){
   
   
   # Replace <br> tags with HTML line breaks
-  filtered_data$Definition <- gsub("<br>", "<br/>", filtered_data$Definition)
+  #filtered_data$Definition <- gsub("<br>", "<br/>", filtered_data$Definition)
+  
+  # Apply bold-text class to Column1
+  #filtered_data$Nom <- paste0('<span class="bold-text">', filtered_data$Nom, '</span>')
   
   #Tableau interactif
   datatable(filtered_data,
@@ -491,15 +494,12 @@ choixTabHelp <- function(choix){
                            autoWidth = TRUE,
                            server = FALSE,
                            dom = 'ftp',
-                           columnDefs = list(list(targets = '_all', className = 'dt-center'),
+                           columnDefs = list(list(targets = '_all', className = 'dt-justify'),
                                              list(targets = c(2:7), visible = FALSE)) # hide column 3 to 8
             ),
             selection = 'single',
             filter = 'top',
             rownames = FALSE
-  )  %>% formatStyle(
-    columns = "Nom",
-    className = "bold-text" # Apply CSS class to column
   )
   
   
