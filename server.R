@@ -41,7 +41,7 @@ source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_GJFM.R")
 
 
 #BSD
-
+source("Y:/Jade/Programmation/3 - Biomarker strategy design/Rcode_BSD_PCFM.R")
 
 
 #---------------------------------------------------------------------------------------------------#
@@ -199,11 +199,152 @@ function(input, output) {
   
   
   
+  
+  
 ##----------------------------------------------------------------------------------------------------------#
 ## Biomarker strategy Design---------------------------------------------------------------------------------
 ##----------------------------------------------------------------------------------------------------------#
   
+  ### Puissance - Calcul ------------------------------------------------------------------------------------
+  BSD_puiss_calc_puiss <- eventReactive(input$BSD_lance_puissance, {
+    
+    BSD_puiss_unif <- c(input$BSD_puiss_unif_a, input$BSD_puiss_unif_b)
+    
+    if(input$BSD_puiss_repartition_par_groupe == "Fixed"){
+      BSD_puiss_nbr_sujet_par_groupe <- input$BSD_puiss_nbr_sujet_par_grp
+    } 
+    else if(input$BSD_puiss_repartition_par_groupe == "Uniform"){
+      BSD_puiss_nbr_sujet_par_groupe <- BSD_puiss_unif
+    }
+    
+    # Appel de la fonction de calcul
+    PowerPCFM(NbGroupsExp = input$BSD_puiss_nbr_groupe,
+              ni          = BSD_puiss_nbr_sujet_par_groupe, 
+              ni_type     = input$BSD_puiss_repartition_par_groupe, 
+              median_H0   = input$BSD_puiss_median_survie_h0,
+              Acc_Dur     = input$BSD_puiss_periode_inclusion, 
+              FUP         = input$BSD_puiss_periode_suivi, 
+              FUP_type    = input$BSD_puiss_type_suivi, 
+              beta0       = input$BSD_puiss_beta0,
+              betaA       = input$BSD_puiss_betaA,
+              shape_W     = input$BSD_puiss_param_weibull,
+              theta       = input$BSD_puiss_theta,
+              ratio       = input$BSD_puiss_ratio,
+              prop_neg    = input$BSD_puiss_prop_neg,
+              Y_samples   = input$BSD_puiss_nbr_echantillon_MC,
+              gamma0      = input$BSD_puiss_gamma0,
+              gammaA      = input$BSD_puiss_gammaA,
+              method      = input$BSD_puiss_method,
+              statistic   = input$BSD_puiss_stat_test, 
+              typeIerror  = input$BSD_puiss_alpha, 
+              test_type   = input$BSD_puiss_type_test, 
+              print.cens  = FALSE, 
+              Bootstrap   = input$BSD_puiss_bootstrap, 
+              Nboot       = input$BSD_puiss_nboot, 
+              seed        = input$BSD_puiss_seed)
+    
+  })
   
+  
+  ### Puissance - affichage du résultats --------------------------------------------------------------------
+  observeEvent(input$BSD_lance_puissance, {
+    
+    shinyjs::show(id = "BSD_puiss_res_FR")
+    
+    output$BSD_puiss_valeur_res <- renderUI({
+      str1 <- paste("Power:", round(BSD_puiss_calc_puiss()$power, digits=3))
+      #str2 <- paste("Power confidence interval: [", round(BSD_puiss_calc_puiss()$powerCI[1], digits=3), ";", round(BSD_puiss_calc_puiss()$powerCI[2], digits=3), "]") #condition pour apparaitre que si bootstrap cocher
+      
+      HTML(paste(str1,
+                 # if(input$BSD_puiss_bootstrap){
+                 #   str2
+                 # },
+                 sep = '<br/>'))
+    })
+  })
+  
+  
+  
+  
+  
+  ### NSN - Calcul ------------------------------------------------------------------------------------------
+  BSD_NSN_calc_NSN <- eventReactive(input$BSD_lance_NSN, {
+    
+    BSD_NSN_unif <- c(input$BSD_NSN_unif_a, input$BSD_NSN_unif_b)
+    
+    if(input$BSD_NSN_repartition_par_groupe == "Fixed"){
+      BSD_NSN_nbr_sujet_par_groupe <- input$BSD_NSN_nbr_sujet_par_grp
+    } 
+    else if(input$BSD_NSN_repartition_par_groupe == "Uniform"){
+      BSD_NSN_nbr_sujet_par_groupe <- BSD_NSN_unif
+    }
+    
+    NsnPCFM(power      = input$BSD_NSN_puissance, 
+            Nb_groups  = input$BSD_NSN_Npts,
+            ni         = BSD_NSN_nbr_sujet_par_groupe,
+            ni_type    = input$BSD_NSN_repartition_par_groupe, 
+            median_H0  = input$BSD_NSN_median_survie_h0,
+            Acc_Dur    = input$BSD_NSN_periode_inclusion, 
+            FUP        = input$BSD_NSN_periode_suivi, 
+            FUP_type   = input$BSD_NSN_type_suivi, 
+            beta0      = input$BSD_NSN_beta0,
+            betaA      = input$BSD_NSN_betaA, 
+            shape_W    = input$BSD_NSN_param_weibull,
+            theta      = input$BSD_NSN_theta, 
+            ratio      = input$BSD_NSN_ratio,, 
+            prop_neg   = input$BSD_NSN_prop_neg,
+            Y_samples  = input$BSD_NSN_nbr_echantillon_MC,
+            gamma0     = input$BSD_NSN_gamma0,
+            gammaA     = input$BSD_NSN_gammaA,
+            method     = input$BSD_NSN_method,
+            statistic  = input$BSD_NSN_stat_test, 
+            typeIerror = input$BSD_NSN_alpha, 
+            test_type  = input$BSD_NSN_type_test,
+            print.cens = FALSE,
+            Bootstrap  = input$BSD_NSN_bootstrap, 
+            Nboot      = input$BSD_NSN_nboot,
+            seed       = input$BSD_NSN_seed)
+    
+  })
+  
+  
+  
+  ### NSN - affichage du résultats --------------------------------------------------------------------------
+  observeEvent(input$BSD_lance_NSN, {
+    
+    shinyjs::show(id = "BSD_NSN_res_FR")
+    
+    output$BSD_NSN_valeur_res <- renderUI({
+      str0 <- paste("Npts:", BSD_NSN_calc_NSN()$Npts)
+      str1 <- paste("Number of groups required:", BSD_NSN_calc_NSN()$G)
+      #str2 <- paste("confidence interval: [", BSD_NSN_calc_NSN()$G_CI[1], ";", BSD_NSN_calc_NSN()$G_CI[2], "]") #condition pour apparaitre que si bootstrap cocher
+      
+      if(length(BSD_NSN_calc_NSN()$ni) == 2){
+        str3 <- paste("Distribution of subject per group: U(", BSD_NSN_calc_NSN()$ni[1], ";", BSD_NSN_calc_NSN()$ni[2], ")")
+      }
+      else if(length(BSD_NSN_calc_NSN()$ni) == 1){
+        str3 <- paste("Number of subject per group:", BSD_NSN_calc_NSN()$ni)
+      }
+      
+      str4 <- paste("Type of subject distribution:", BSD_NSN_calc_NSN()$ni_type)
+      str5 <- paste("True power:", BSD_NSN_calc_NSN()$true_power)
+      str6 <- paste("Type I error:", BSD_NSN_calc_NSN()$alpha)
+      str7 <- paste("Censure:", BSD_NSN_calc_NSN()$cens[1], " ; ", BSD_NSN_calc_NSN()$cens[2])
+      str8 <- paste("Events:", BSD_NSN_calc_NSN()$Events[1], " ; ", BSD_NSN_calc_NSN()$Events[2])
+      
+      HTML(paste(str1,
+                 # if(input$BSD_NSN_bootstrap){
+                 #   str2
+                 # },
+                 str3,
+                 str4,
+                 str5,
+                 str6,
+                 str7,
+                 str8,
+                 sep = '<br/>'))
+    })
+  })
   
   
   

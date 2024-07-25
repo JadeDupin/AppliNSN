@@ -48,6 +48,7 @@ source("helpTab/helpTab.R")
 
 
 #BSD
+# source("Y:/Jade/Programmation/3 - Biomarker strategy design/Rcode_BSD_PCFM.R")
 
 
 
@@ -525,29 +526,408 @@ dashboardPage(
 ##----------------------------------------------------------------------------------------------------------#
 ## Biomarker strategy Design---------------------------------------------------------------------------------
 ##----------------------------------------------------------------------------------------------------------#
+
+      ### Calcul de puissance================================================================================
       tabItem(
-        tabName = "biomark_strat_design",
+        tabName = "BSD_calc_puissance",
           
         tags$h2("Biomarker strategy Design", id = "titre_page"),
         
-          tabsetPanel(
-            tabPanel(
-              "Setting"
+        tabsetPanel(
+          tabPanel(
+            "Setting",
+            
+            h3("Power calculation parameters", id = "sous_titre"),
+            
+            tags$br(),
+            
+            div(id = "seed",
+                numericInput("BSD_puiss_seed", label = "Seed", 105795)
             ),
             
-            tabPanel(
-              "Help",
-              
-              h3("Help", id = "sous_titre"),
-              
-              tags$br(),
+            tags$br(),
+            tags$br(),
+            
+            fluidRow(
+              id = "BSD_puiss_data_sujets_FR",
               
               div(
-                id="BSD_tab_help",
-                choixTabHelp("BSD_help")
+                id="BSD_puiss_data_sujets_div",
+                
+                column(width = 4, 
+                       numericInput("BSD_puiss_nbr_groupe", "Number of groups", 10),
+                       
+                       numericInput("BSD_puiss_prop_neg", "Patient with the control in experimental arm", 0.4)
+                ),
+                
+                column(width = 4,
+                       selectInput("BSD_puiss_repartition_par_groupe", "Distribution of patient by groupe",
+                                   c("Fixed",  "Uniform")),
+                       
+                       conditionalPanel(
+                         condition = "input.BSD_puiss_repartition_par_groupe == 'Fixed'",
+                         numericInput("BSD_puiss_nbr_sujet_par_grp", "Number of subjets per group", 15)),
+                       
+                       conditionalPanel(
+                         condition = "input.BSD_puiss_repartition_par_groupe == 'Uniform'",
+                         numericInput("BSD_puiss_unif_a", "Parameter a of a uniform distribution", 1),
+                         numericInput("BSD_puiss_unif_b", "Parameter b of a uniform distribution", 2))
+                ),
+                
+                column(width = 4, numericInput("BSD_puiss_ratio", "Ratio", 1))
+              )
+            ),
+            
+            tags$br(),
+            tags$br(),
+            
+            fluidRow(
+              column(
+                width = 6, 
+                id = "BSD_puiss_info_test_simu_FR",
+                
+                h4("Statistic", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_puiss_info_test",
+                  
+                  selectInput("BSD_puiss_type_test", "Type of test",
+                              c("2-sided",  "1-sided")),
+                  
+                  numericInput("BSD_puiss_alpha", "Type I error", 0.05, min=0, max=0.2),
+                  
+                  selectInput("BSD_puiss_stat_test", "Statistic",
+                              c("Wald"))
+                ),
+                
+                tags$br(),
+                
+                h4("Fisher matrix", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_puiss_fisher",
+                  
+                  numericInput("BSD_puiss_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
+                ),
+                
+                tags$br(),
+                
+                h4("Confidence interval", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_puiss_simulation",
+                  
+                  h5("Calculate the confidence interval ?", id="IC_titre"),
+                  checkboxInput(inputId = "BSD_puiss_bootstrap", label = "Bootstrap", value = FALSE),
+                  
+                  numericInput("BSD_puiss_nboot", "Number of bootstrap resamples", 1000)
+                ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_puiss_test_beta",
+                  
+                  selectInput("BSD_puiss_method", "Method",
+                              c("joint",  "betatest", "betatest")),
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("BSD_puiss_beta0", "Beta values under H0 (logarithm of)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("BSD_puiss_betaA", "Beta values under HA (logarithm of)", value = 0.75)),
+                  )
+                )
+              ),
+              
+              column(
+                width = 6,
+                id = "BSD_puiss_data_essai_col",
+                
+                h4("About the trial", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_puiss_data_essai_div",
+                  
+                  selectInput("BSD_puiss_type_suivi", "Type of follow-up",
+                              c("UptoEnd",  "Fixed")),
+                  tags$br(),
+                  
+                  p("Define periods with the same unit for all periods !"),
+                  p("Default values are in months."),
+                  
+                  numericInput("BSD_puiss_periode_inclusion", "Inclusion period", 24),
+                  
+                  numericInput("BSD_puiss_periode_suivi", "Follow-up period", 30),
+                  
+                  numericInput("BSD_puiss_median_survie_h0", "Median survival time under H0", 12),
+                  
+                  tags$br(),
+                  tags$br(),
+                  
+                  numericInput("BSD_puiss_param_weibull", "Shape parameter of Weibull", 1),
+                  
+                  numericInput("BSD_puiss_theta", "Variability of the baseline risk at the individual level", 0.25),
+                  
+                  tags$br(),
+                  tags$br(),
+                  
+                  fluidRow(
+                    column(width=6, 
+                           numericInput("BSD_puiss_gamma0", "Gamma 0", 0.25)),
+                    
+                    column(width=6, 
+                           numericInput("BSD_puiss_gammaA", "Gamma A", 0.25))
+                  )
+                )
+              )
+            ),
+            
+            tags$br(),
+            
+            div(
+              id = "BSD_lance_puissance",
+              
+              actionButton(inputId="BSD_lance_puissance", label="Compute", class="btn btn-primary btn-lg", style="color: white;")
+            ),
+            
+            conditionalPanel(
+              condition = "input.BSD_lance_puissance",
+              
+              fluidRow(
+                id= "BSD_puiss_res_FR",
+                
+                h3(id="BSD_resultat_titre", "Results"),
+                
+                tags$br(),
+                
+                div(
+                  column(11, id="BSD_resultat_puissance", htmlOutput(outputId = "BSD_puiss_valeur_res"))
+                )
               )
             )
+          ),
+          
+          ### Help=========================================================================================
+          tabPanel(
+            "Help",
+            
+            h3("Help", id = "sous_titre"),
+            
+            tags$br(),
+            
+            div(
+              id="BSD_tab_help",
+              choixTabHelp("BSD_help")
+            )
           )
+        )
+      ),
+
+      ### Calcul du NSN======================================================================================
+      tabItem(
+        tabName = "BSD_calc_NSN",
+        
+        tags$h2("Biomarker strategy Design", id = "titre_page"),
+        
+        tabsetPanel(
+          tabPanel(
+            "Setting",
+            
+            h3("NSN calculation parameters", id = "sous_titre"),
+            
+            tags$br(),
+            
+            div(id = "seed",
+                numericInput("BSD_NSN_seed", label = "Seed", 105795)
+            ),
+            
+            tags$br(),
+            tags$br(),
+            
+            fluidRow(
+              id="BSD_NSN_data_sujet_FR",
+              
+              div(
+                id="BSD_NSN_data_sujet_div",
+                
+                column(width = 4,
+                       selectInput("BSD_NSN_repartition_par_groupe", "Distribution of patient by group",
+                                   c("Fixed",  "Uniform")),
+                       
+                       numericInput("BSD_NSN_prop_neg", "Patient with the control in experimental arm", 0.4)
+                ),
+                
+                column(width = 4, 
+                       numericInput("BSD_NSN_ratio", "Ratio", 1),
+                       
+                       numericInput("BSD_NSN_Npts", "Npts", 2),),
+                
+                column(width = 4,
+                       conditionalPanel(
+                         condition = "input.BSD_NSN_repartition_par_groupe == 'Fixed'",
+                         numericInput("BSD_NSN_nbr_sujet_par_grp", "Number of subjects per group", 15)),
+                       
+                       conditionalPanel(
+                         condition = "input.BSD_NSN_repartition_par_groupe == 'Uniform'",
+                         numericInput("BSD_NSN_unif_a", "Parameter a of a uniform distribution", 1),
+                         numericInput("BSD_NSN_unif_b", "Parameter b of a uniform distribution", 2))
+                )
+              )
+            ),
+            
+            tags$br(),
+            tags$br(),
+            
+            fluidRow(
+              column(
+                width = 6, 
+                id = "BSD_NSN_info_test_simu_FR",
+                
+                h4("Statistic", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_NSN_info_test",
+                  
+                  numericInput("BSD_NSN_puissance", "Power", 0.8),
+                  
+                  selectInput("BSD_NSN_type_test", "Type of test",
+                              c("2-sided",  "1-sided")),
+                  
+                  numericInput("BSD_NSN_alpha", "Type I error", 0.05, min=0, max=0.2),
+                  
+                  selectInput("BSD_NSN_stat_test", "Statistic",
+                              c("Wald"))
+                ),
+                
+                tags$br(),
+                
+                h4("Fisher matrix", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_NSN_fisher",
+                  
+                  numericInput("BSD_NSN_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
+                ),
+                
+                tags$br(),
+                
+                h4("Confidence interval", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_NSN_simulation",
+                  
+                  h5("Calculate the confidence interval ?", id="IC_titre"),
+                  checkboxInput(inputId = "BSD_NSN_bootstrap", label = "Bootstrap", value = FALSE),
+                  
+                  numericInput("BSD_NSN_nboot", "Number of bootstrap resamples", 1000)
+                ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_NSN_test_beta",
+                  
+                  selectInput("BSD_NSN_method", "Method",
+                              c("joint",  "betatest", "betatest")),
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("BSD_NSN_beta0", "Beta values under H0 (logarithm of)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("BSD_NSN_betaA", "Beta values under HA (logarithm of)", value = 0.75)),
+                  )
+                )
+              ),
+              
+              column(
+                width = 6,
+                id="BSD_NSN_data_essai_col",
+                
+                h4("About the trial", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="BSD_NSN_data_essai",
+                  
+                  selectInput("BSD_NSN_type_suivi", "Type of follow-up",
+                              c("UptoEnd",  "Fixed")),
+                  tags$br(),
+                  
+                  p("Define periods with the same unit for all periods !"),
+                  p("Default values are in months."),
+                  
+                  numericInput("BSD_NSN_periode_inclusion", "Inclusion period", 24),
+                  
+                  numericInput("BSD_NSN_periode_suivi", "Follow-up period", 30),
+                  
+                  numericInput("BSD_NSN_median_survie_h0", "Median survival time under H0", 12),
+                  
+                  tags$br(),
+                  tags$br(),
+                  
+                  numericInput("BSD_NSN_param_weibull", "Shape parameter of Weibull", 1),
+                  
+                  numericInput("BSD_NSN_theta", "Variability of the baseline risk at the individual level", 0.25),
+                  
+                  tags$br(),
+                  tags$br(),
+                  
+                  fluidRow(
+                    column(width=6, 
+                           numericInput("BSD_NSN_gamma0", "Gamma 0", 0.25)),
+                    
+                    column(width=6, 
+                           numericInput("BSD_NSN_gammaA", "Gamma A", 0.25))
+                  )
+                )
+              )
+            ),
+            
+            tags$br(),
+            
+            div(
+              id = "BSD_lance_NSN",
+              
+              actionButton(inputId="BSD_lance_NSN", label="Compute", class="btn btn-primary btn-lg", style="color: white;")
+            ),
+            
+            conditionalPanel(
+              condition = "input.BSD_lance_NSN",
+              
+              fluidRow(
+                id="BSD_NSN_res_FR",
+                
+                h3(id="BSD_resultat_titre", "Résultats"),
+                
+                tags$br(),
+                
+                div(
+                  column(11, id="BSD_resultat_NSN", htmlOutput(outputId = "BSD_NSN_valeur_res"))
+                )
+              )
+            )
+          ),
+          
+          ### Help=========================================================================================
+          tabPanel(
+            "Help",
+            
+            h3("Help", id = "sous_titre"),
+            
+            tags$br(),
+            
+            div(
+              id="BSD_tab_help",
+              choixTabHelp("BSD_help")
+            )
+          )
+        )
       ),
                          
 ##----------------------------------------------------------------------------------------------------------#

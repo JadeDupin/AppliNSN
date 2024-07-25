@@ -40,11 +40,19 @@
     font-weight: bold;
 }
 
+#BSD_resultat_titre {
+    padding-left: 60px; 
+    text-decoration: underline overline; 
+    font-weight: bold;
+}
+
 #DR_resultat_titre {
     padding-left: 60px; 
     text-decoration: underline overline; 
     font-weight: bold;
 }
+
+
 
 
 
@@ -66,6 +74,12 @@
 #intro_FR {
     margin-left: 5%;
 }
+
+
+
+
+
+
 
 
 /*DG - Puissance*/
@@ -899,6 +913,217 @@
     font-size: 20px; 
     border: thick double #32a1ce;
 }
+
+
+
+
+
+
+
+
+
+
+/*BSD - PCFM - Puissance*/
+#BSD_puiss_data_sujets_FR {
+    margin-left: 40px; 
+    margin-right: 30px; 
+    
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#BSD_puiss_data_sujets_div {
+    padding-left: 50px; 
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+
+#BSD_puiss_info_test_simu_FR {
+    padding-left: 50px;
+}
+
+#BSD_puiss_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_puiss_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_puiss_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_puiss_simulation {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+#BSD_puiss_data_essai_col {
+    padding-right: 50px;
+}
+
+#BSD_puiss_data_essai_div {
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top: 10px; 
+    
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+
+#BSD_lance_puissance {
+    text-align: center;
+}
+
+
+#BSD_resultat_puissance {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+/*BSD - PCFM - NSN*/
+#BSD_NSN_data_sujet_FR {
+    margin-left: 40px; 
+    margin-right: 30px; 
+    
+    border-style: dotted; 
+    border-color: black; 
+    border-width: 1.5px; 
+    border-radius: 20px;
+}
+
+#BSD_NSN_data_sujet_div {
+    padding-left: 50px; 
+    padding-top: 10px;
+}
+
+
+#BSD_NSN_info_test_simu_FR {
+    padding-left: 50px
+}
+
+#BSD_NSN_info_test {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_NSN_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#BSD_NSN_simulation {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+
+#BSD_NSN_data_essai_col {
+    padding-right: 50px;
+}
+
+#BSD_NSN_data_essai {
+    padding-left: 50px; 
+    padding-top: 10px; 
+    border-style: dashed; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px;
+}
+
+
+#BSD_lance_NSN {
+    text-align: center;
+}
+
+#BSD_resultat_NSN {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding-top : 10px; 
+    padding-bottom: 10px; 
+    font-size: 20px; 
+    border: thick double #32a1ce;
+}
+
+
+
 
 
 
