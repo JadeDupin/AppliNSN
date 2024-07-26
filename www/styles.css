@@ -304,6 +304,18 @@
     border-radius: 10px
 }
 
+#DR_SFM_puiss_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
 #DR_SFM_puiss_data_essai_col {
     padding-right: 50px;
 }
@@ -371,6 +383,18 @@
 }
 
 #DR_SFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_SFM_NSN_test_beta {
     padding-left: 50px; 
     padding-right: 50px; 
     padding-top: 10px; 
@@ -456,6 +480,18 @@
     border-radius: 10px
 }
 
+#DR_NFM_puiss_test_beta {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
 #DR_NFM_puiss_data_essai_col {
     padding-right: 50px;
 }
@@ -521,6 +557,18 @@
 }
 
 #DR_NFM_NSN_fisher {
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-top: 10px; 
+    margin-right: 100px; 
+    
+    border-style: double; 
+    border-color: black; 
+    border-width: 1px; 
+    border-radius: 10px
+}
+
+#DR_NFM_NSN_test_beta {
     padding-left: 50px; 
     padding-right: 50px; 
     padding-top: 10px; 

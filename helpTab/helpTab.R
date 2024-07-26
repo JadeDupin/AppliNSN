@@ -52,7 +52,7 @@ lign3 <- c("<div class='bold-text'>Distribution of patient by groupe</div>",
            0, 
            0, 
            0,
-           0)
+           1)
 
 lign4 <- c("<div class='bold-text'>Follow-up period</div>",
            "Duration of follow-up (same unit as the median)",
@@ -61,7 +61,7 @@ lign4 <- c("<div class='bold-text'>Follow-up period</div>",
            1, 
            1, 
            1,
-           0)
+           1)
 
 lign5 <- c("<div class='bold-text'>Hazard Ratio (HR)</div>", 
            "Hazard ratio or ratio of median survival times",
@@ -79,7 +79,7 @@ lign6 <- c("<div class='bold-text'>Inclusion period</div>",
            1, 
            1, 
            1,
-           0)
+           1)
 
 lign7 <- c("<div class='bold-text'>Median survival time under H0</div>", 
            "The survival median under null hypothesis",
@@ -88,7 +88,7 @@ lign7 <- c("<div class='bold-text'>Median survival time under H0</div>",
            1, 
            0, 
            0,
-           0)
+           1)
 
 lign8 <- c("<div class='bold-text'>Number of bootstrap resamples</div>", 
            "Default 1000",
@@ -106,7 +106,7 @@ lign9 <- c("<div class='bold-text'>Number of groups</div>",
            0, 
            1, 
            1,
-           0)
+           1)
 
 lign10 <- c("<div class='bold-text'>Number of Monte Carlo runs</div>",
             "Number of runs launched to approximate the Fisher matrix by simulations",
@@ -115,7 +115,7 @@ lign10 <- c("<div class='bold-text'>Number of Monte Carlo runs</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign11 <- c("<div class='bold-text'>Number of subjects per group</div>", 
             "Number of patients expected in each group",
@@ -124,7 +124,7 @@ lign11 <- c("<div class='bold-text'>Number of subjects per group</div>",
             0, 
             0, 
             0,
-            0)
+            1)
 
 lign12 <- c("<div class='bold-text'>Ratio</div>", 
             "Randomization ratio in favor of the experimental arm. <br>Default value is 1.",
@@ -133,7 +133,7 @@ lign12 <- c("<div class='bold-text'>Ratio</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign13 <- c("<div class='bold-text'>Seed</div>",
             "Seed for reproducing estimates",
@@ -142,7 +142,7 @@ lign13 <- c("<div class='bold-text'>Seed</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign14 <- c("<div class='bold-text'>Shape parameter of Weibull</div>",
             "Shape parameter of the Weibull distribution. Defaults to 1, assuming exponentially distributed survival times.",
@@ -151,7 +151,7 @@ lign14 <- c("<div class='bold-text'>Shape parameter of Weibull</div>",
             1, 
             0, 
             0,
-            0)
+            1)
 
 lign15 <- c("<div class='bold-text'>Statistic</div>",
             "The test used to evaluate whether there is a significant clinical effect between treatment arms",
@@ -160,7 +160,7 @@ lign15 <- c("<div class='bold-text'>Statistic</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign16 <- c("<div class='bold-text'>Type I error</div>",
             "Type I error rate or significance level. Default 0.05.",
@@ -169,7 +169,7 @@ lign16 <- c("<div class='bold-text'>Type I error</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign17 <- c("<div class='bold-text'>Type of follow-up</div>", 
             "Defines how patients are monitored: 
@@ -180,7 +180,7 @@ lign17 <- c("<div class='bold-text'>Type of follow-up</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign18 <- c("<div class='bold-text'>Type of test</div>",
             "Allows to specify the direction of the test: 
@@ -191,7 +191,7 @@ lign18 <- c("<div class='bold-text'>Type of test</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign19 <- c("<div class='bold-text'>Variance of treatment effect</div>",
             "Variance of random slope (random effect associated with treatment effect between groups). <br>Default value is 0.1.",
@@ -218,7 +218,7 @@ lign21 <- c("<div class='bold-text'>Power</div>",
             1, 
             1, 
             1,
-            0)
+            1)
 
 lign22 <- c("<div class='bold-text'>Data type</div>",
             "Type of data considered; can be either 'rec_event1', 'rec_event2' or 'grouped':
@@ -319,7 +319,7 @@ lign31 <- c("<div class='bold-text'>Variability of the baseline risk at the indi
             0, 
             1, 
             1,
-            0)
+            1)
 
 lign32 <- c("<div class='bold-text'>Variability of the baseline risk at the cluster level</div>",
             "Variability of the baseline risk at the cluster level",
@@ -395,7 +395,7 @@ lign39 <- c("<div class='bold-text'>Method</div>",
             1,
             0)
 
-lign40 <- c("<div class='bold-text'>Beta values for recurrent events under H0 (logarithm of)</div>", 
+lign40 <- c("<div class='bold-text'>Beta values for recurrent events under H0 (logarithm of HR)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under H0.",
             0, 
             0, 
@@ -404,7 +404,7 @@ lign40 <- c("<div class='bold-text'>Beta values for recurrent events under H0 (l
             1,
             0)
 
-lign41 <- c("<div class='bold-text'>Beta values for recurrent events under HA (logarithm of)</div>", 
+lign41 <- c("<div class='bold-text'>Beta values for recurrent events under HA (logarithm of HR)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for recurrent events under HA.",
             0, 
             0, 
@@ -413,7 +413,7 @@ lign41 <- c("<div class='bold-text'>Beta values for recurrent events under HA (l
             1,
             0)
 
-lign42 <- c("<div class='bold-text'>Beta values for terminal events under H0 (logarithm of)</div>", 
+lign42 <- c("<div class='bold-text'>Beta values for terminal events under H0 (logarithm of HR)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under H0.",
             0, 
             0, 
@@ -422,7 +422,7 @@ lign42 <- c("<div class='bold-text'>Beta values for terminal events under H0 (lo
             1,
             0)
 
-lign43 <- c("<div class='bold-text'>Beta values for terminal events under HA (logarithm of)</div>", 
+lign43 <- c("<div class='bold-text'>Beta values for terminal events under HA (logarithm of HR)</div>", 
             "Beta values corresponding to the logarithm of the Hazard Ratio for terminal events under HA.",
             0, 
             0, 
@@ -440,6 +440,59 @@ lign44 <- c("<div class='bold-text'>Dependence between recurrent and terminal ev
             0,
             0)
 
+lign45 <- c("<div class='bold-text'>Patient with the control in experimental arm</div>", 
+            "Proportion of patient in the experimental arm that don't have identified molecular therapy. <br>Value between 0 and 1. ",
+            0, 
+            0, 
+            0, 
+            0, 
+            0,
+            1)
+
+lign46 <- c("<div class='bold-text'>Method</div>", 
+            "Can be either 'joint', 'betatest', or 'gammatest' to estimate power when testing.",
+            0, 
+            0, 
+            0, 
+            1, 
+            1,
+            0)
+
+lign47 <- c("<div class='bold-text'>Beta values under H0 (logarithm of HR)</div>", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio under H0.",
+            0, 
+            0, 
+            0, 
+            0, 
+            0,
+            1)
+
+lign48 <- c("<div class='bold-text'>Beta values under HA (logarithm of HR)</div>", 
+            "Beta values corresponding to the logarithm of the Hazard Ratio under HA.",
+            0, 
+            0, 
+            0, 
+            0, 
+            0,
+            1)
+
+lign49 <- c("<div class='bold-text'>Gamma values under H0 (logarithm of HR)</div>", 
+            "Gamma values corresponding to the targeted treatment effect under H0.",
+            0, 
+            0, 
+            0, 
+            0, 
+            0,
+            1)
+
+lign50 <- c("<div class='bold-text'>Gamma values under HA (logarithm of HR)</div>", 
+            "Gamma values corresponding to the targeted treatment effect under HA.",
+            0, 
+            0, 
+            0, 
+            0, 
+            0,
+            1)
 
 
 
@@ -449,7 +502,7 @@ tabDef <- data.frame(do.call("rbind", list(lign1, lign2, lign3, lign4, lign5, li
                                 lign11, lign12, lign13, lign14, lign15, lign16, lign17, lign18, lign19, lign20,
                                 lign21, lign22, lign23, lign24, lign25, lign26, lign27, lign28, lign29, lign30, 
                                 lign31, lign32, lign33, lign34, lign35, lign36, lign37, lign38, lign39, lign40, 
-                                lign41, lign42, lign43, lign44)))
+                                lign41, lign42, lign43, lign44, lign45, lign46, lign47, lign48, lign49, lign50)))
 
 colnames(tabDef) <- c("Nom",
                       "Definition", 

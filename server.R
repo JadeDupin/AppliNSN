@@ -225,22 +225,20 @@ function(input, output) {
               Acc_Dur     = input$BSD_puiss_periode_inclusion, 
               FUP         = input$BSD_puiss_periode_suivi, 
               FUP_type    = input$BSD_puiss_type_suivi, 
-              beta0       = input$BSD_puiss_beta0,
-              betaA       = input$BSD_puiss_betaA,
+              beta0       = log(input$BSD_puiss_beta0),
+              betaA       = log(input$BSD_puiss_betaA),
               shape_W     = input$BSD_puiss_param_weibull,
               theta       = input$BSD_puiss_theta,
               ratio       = input$BSD_puiss_ratio,
               prop_neg    = input$BSD_puiss_prop_neg,
               Y_samples   = input$BSD_puiss_nbr_echantillon_MC,
-              gamma0      = input$BSD_puiss_gamma0,
-              gammaA      = input$BSD_puiss_gammaA,
+              gamma0      = log(input$BSD_puiss_gamma0),
+              gammaA      = log(input$BSD_puiss_gammaA),
               method      = input$BSD_puiss_method,
               statistic   = input$BSD_puiss_stat_test, 
               typeIerror  = input$BSD_puiss_alpha, 
               test_type   = input$BSD_puiss_type_test, 
               print.cens  = FALSE, 
-              Bootstrap   = input$BSD_puiss_bootstrap, 
-              Nboot       = input$BSD_puiss_nboot, 
               seed        = input$BSD_puiss_seed)
     
   })
@@ -253,12 +251,8 @@ function(input, output) {
     
     output$BSD_puiss_valeur_res <- renderUI({
       str1 <- paste("Power:", round(BSD_puiss_calc_puiss()$power, digits=3))
-      #str2 <- paste("Power confidence interval: [", round(BSD_puiss_calc_puiss()$powerCI[1], digits=3), ";", round(BSD_puiss_calc_puiss()$powerCI[2], digits=3), "]") #condition pour apparaitre que si bootstrap cocher
       
       HTML(paste(str1,
-                 # if(input$BSD_puiss_bootstrap){
-                 #   str2
-                 # },
                  sep = '<br/>'))
     })
   })
@@ -280,29 +274,26 @@ function(input, output) {
     }
     
     NsnPCFM(power      = input$BSD_NSN_puissance, 
-            Nb_groups  = input$BSD_NSN_Npts,
             ni         = BSD_NSN_nbr_sujet_par_groupe,
             ni_type    = input$BSD_NSN_repartition_par_groupe, 
             median_H0  = input$BSD_NSN_median_survie_h0,
             Acc_Dur    = input$BSD_NSN_periode_inclusion, 
             FUP        = input$BSD_NSN_periode_suivi, 
             FUP_type   = input$BSD_NSN_type_suivi, 
-            beta0      = input$BSD_NSN_beta0,
-            betaA      = input$BSD_NSN_betaA, 
+            beta0      = log(input$BSD_NSN_beta0),
+            betaA      = log(input$BSD_NSN_betaA), 
             shape_W    = input$BSD_NSN_param_weibull,
             theta      = input$BSD_NSN_theta, 
-            ratio      = input$BSD_NSN_ratio,, 
+            ratio      = input$BSD_NSN_ratio, 
             prop_neg   = input$BSD_NSN_prop_neg,
             Y_samples  = input$BSD_NSN_nbr_echantillon_MC,
-            gamma0     = input$BSD_NSN_gamma0,
-            gammaA     = input$BSD_NSN_gammaA,
+            gamma0     = log(input$BSD_NSN_gamma0),
+            gammaA     = log(input$BSD_NSN_gammaA),
             method     = input$BSD_NSN_method,
             statistic  = input$BSD_NSN_stat_test, 
             typeIerror = input$BSD_NSN_alpha, 
             test_type  = input$BSD_NSN_type_test,
             print.cens = FALSE,
-            Bootstrap  = input$BSD_NSN_bootstrap, 
-            Nboot      = input$BSD_NSN_nboot,
             seed       = input$BSD_NSN_seed)
     
   })
@@ -315,9 +306,8 @@ function(input, output) {
     shinyjs::show(id = "BSD_NSN_res_FR")
     
     output$BSD_NSN_valeur_res <- renderUI({
-      str0 <- paste("Npts:", BSD_NSN_calc_NSN()$Npts)
-      str1 <- paste("Number of groups required:", BSD_NSN_calc_NSN()$G)
-      #str2 <- paste("confidence interval: [", BSD_NSN_calc_NSN()$G_CI[1], ";", BSD_NSN_calc_NSN()$G_CI[2], "]") #condition pour apparaitre que si bootstrap cocher
+      str0 <- paste("Total of patients:", BSD_NSN_calc_NSN()$Npts)
+      str1 <- paste("Number of experimental groups:", BSD_NSN_calc_NSN()$NbGroupsExp)
       
       if(length(BSD_NSN_calc_NSN()$ni) == 2){
         str3 <- paste("Distribution of subject per group: U(", BSD_NSN_calc_NSN()$ni[1], ";", BSD_NSN_calc_NSN()$ni[2], ")")
@@ -327,15 +317,13 @@ function(input, output) {
       }
       
       str4 <- paste("Type of subject distribution:", BSD_NSN_calc_NSN()$ni_type)
-      str5 <- paste("True power:", BSD_NSN_calc_NSN()$true_power)
+      str5 <- paste("True power:", round(BSD_NSN_calc_NSN()$true_power, digits = 2))
       str6 <- paste("Type I error:", BSD_NSN_calc_NSN()$alpha)
-      str7 <- paste("Censure:", BSD_NSN_calc_NSN()$cens[1], " ; ", BSD_NSN_calc_NSN()$cens[2])
-      str8 <- paste("Events:", BSD_NSN_calc_NSN()$Events[1], " ; ", BSD_NSN_calc_NSN()$Events[2])
+      str7 <- paste("Censure:", round(BSD_NSN_calc_NSN()$cens[1], digits = 2), " ; ", round(BSD_NSN_calc_NSN()$cens[2], digits = 2))
+      str8 <- paste("Events:", round(BSD_NSN_calc_NSN()$Events[1], digits = 2), " ; ", round(BSD_NSN_calc_NSN()$Events[2], digits = 2))
       
-      HTML(paste(str1,
-                 # if(input$BSD_NSN_bootstrap){
-                 #   str2
-                 # },
+      HTML(paste(str0,
+                 str1,
                  str3,
                  str4,
                  str5,
@@ -417,8 +405,8 @@ function(input, output) {
     
     output$DR_SFM_puiss_valeur_res <- renderUI({
       str1 <- paste("Power:", round(DR_SFM_puiss_calc_puiss()$power, digits=3))
-      str2 <- paste("Under H0, N° events:", round(DR_SFM_puiss_calc_puiss()$events[1], digits=2), "au total")
-      str3 <- paste("Under HA, N° events:", round(DR_SFM_puiss_calc_puiss()$events[2], digits=2), "au total")
+      str2 <- paste("Under H0, N° events:", round(DR_SFM_puiss_calc_puiss()$events[1], digits=2), "in total")
+      str3 <- paste("Under HA, N° events:", round(DR_SFM_puiss_calc_puiss()$events[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -503,8 +491,8 @@ function(input, output) {
       str3 <- paste("Type of events distribution:", DR_SFM_NSN_calc_NSN()$ni_type)
       str4 <- paste("True power:", round(DR_SFM_NSN_calc_NSN()$true_power, digits=3))
       str5 <- paste("Type I error:", DR_SFM_NSN_calc_NSN()$alpha)
-      str6 <- paste("Under H0, N° events:", round(DR_SFM_NSN_calc_NSN()$events[1], digits = 2), "au total")
-      str7 <- paste("Under HA, N° events:", round(DR_SFM_NSN_calc_NSN()$events[2], digits = 2), "au total")
+      str6 <- paste("Under H0, N° events:", round(DR_SFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
+      str7 <- paste("Under HA, N° events:", round(DR_SFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
 
       HTML(paste(str1,
                  str2,
@@ -598,8 +586,8 @@ function(input, output) {
     
     output$DR_NFM_puiss_valeur_res <- renderUI({
       str1 <- paste("Power:", round(DR_NFM_puiss_calc_puiss()$power, digits=3))
-      str2 <- paste("Under H0, N° events:", round(DR_NFM_puiss_calc_puiss()$events[1], digits=2), "au total")
-      str3 <- paste("Under HA, N° events:", round(DR_NFM_puiss_calc_puiss()$events[2], digits=2), "au total")
+      str2 <- paste("Under H0, N° events:", round(DR_NFM_puiss_calc_puiss()$events[1], digits=2), "in total")
+      str3 <- paste("Under HA, N° events:", round(DR_NFM_puiss_calc_puiss()$events[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -712,8 +700,8 @@ function(input, output) {
       
       str6 <- paste("True power:", round(DR_NFM_NSN_calc_NSN()$true_power, digits=3))
       str7 <- paste("Type I error:", DR_NFM_NSN_calc_NSN()$alpha)
-      str8 <- paste("Under H0, N° events:", round(DR_NFM_NSN_calc_NSN()$events[1], digits = 2), "au total")
-      str9 <- paste("Under HA, N° events:", round(DR_NFM_NSN_calc_NSN()$events[2], digits = 2), "au total")
+      str8 <- paste("Under H0, N° events:", round(DR_NFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
+      str9 <- paste("Under HA, N° events:", round(DR_NFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -787,12 +775,12 @@ function(input, output) {
       str1 <- paste("Power:", round(DR_JFM_puiss_calc_puiss()$power, digits=3))
       
       str2 <- paste("Recurrent events:")
-      str3 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[1], digits=2), "au total")
-      str4 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[2], digits=2), "au total")
+      str3 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
+      str4 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
       
       str5 <- paste("Terminal events:")
-      str6 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[1], digits=2), "au total")
-      str7 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[2], digits=2), "au total")
+      str6 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
+      str7 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  "\n",
@@ -880,12 +868,12 @@ function(input, output) {
       str5 <- paste("Type I error:", DR_JFM_NSN_calc_NSN()$alpha)
       
       str6 <- paste("Recurrent events:")
-      str7 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[1], digits=2), "au total")
-      str8 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[2], digits=2), "au total")
+      str7 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
+      str8 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
       
       str9 <- paste("Terminal events:")
-      str10 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[1], digits=2), "au total")
-      str11 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[2], digits=2), "au total")
+      str10 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
+      str11 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -963,12 +951,12 @@ function(input, output) {
       str1 <- paste("Power:", round(DR_GJFM_puiss_calc_puiss()$power, digits=3))
       
       str2 <- paste("Recurrent events:")
-      str3 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[1], digits=2), "au total")
-      str4 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[2], digits=2), "au total")
+      str3 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
+      str4 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
       
       str5 <- paste("Terminal events:")
-      str6 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[1], digits=2), "au total")
-      str7 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[2], digits=2), "au total")
+      str6 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
+      str7 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  "\n",
@@ -1056,12 +1044,12 @@ function(input, output) {
       str5 <- paste("Type I error:", DR_GJFM_NSN_calc_NSN()$typeIerror)
       
       str6 <- paste("Recurrent events:")
-      str7 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[1], digits=2), "au total")
-      str8 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[2], digits=2), "au total")
+      str7 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
+      str8 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
       
       str9 <- paste("Terminal events:")
-      str10 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[1], digits=2), "au total")
-      str11 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[2], digits=2), "au total")
+      str10 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
+      str11 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,

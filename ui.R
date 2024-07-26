@@ -129,8 +129,8 @@ dashboardPage(
           id = "intro_FR",
           
           
-          h3("Grouped Data", id = "intro_titre"),
-          p(id = "intro_texte_descr", "Text and links"),
+          h4("Grouped Data", id = "intro_titre"),
+          p(id = "intro_texte_descr", "Dinart D, Bellera C, Rondeau V. Sample size estimation for cancer randomized trials in the presence of heterogeneous populations. Biometrics. 2022 Dec;78(4):1662-1673. doi: 10.1111/biom.13527. Epub 2021 Sep 3. PMID: 34242412."),
           
           
           
@@ -139,8 +139,8 @@ dashboardPage(
           
           
           
-          h3("Biomarker strategy Design", id = "intro_titre"),
-          p(id = "intro_texte_descr", "Text and links"),
+          h4("Biomarker strategy Design", id = "intro_titre"),
+          p(id = "intro_texte_descr", "Dinart D, Rondeau V, Bellera C. Sample Size Estimation Using a Partially Clustered Frailty Model for Biomarker-Strategy Designs With Multiple Treatments. Pharm Stat. 2024 Jul 16. doi: 10.1002/pst.2407. Epub ahead of print. PMID: 39014905."),
           
           
           
@@ -149,25 +149,8 @@ dashboardPage(
           
           
           
-          h3("Recurring Data", id = "intro_titre"),
-          
-          h4("Shared frailty model", id="intro_sous_titre"),
-          p(id = "intro_texte_descr", "Text and links"),
-          
-          tags$br(),
-          
-          h4("Nested frailty model", id="intro_sous_titre"),
-          p(id = "intro_texte_descr", "Text and links"),
-          
-          tags$br(),
-          
-          h4("Joint frailty model", id="intro_sous_titre"),
-          p(id = "intro_texte_descr", "Text and links"),
-          
-          tags$br(),
-          
-          h4("General joint frailty model", id="intro_sous_titre"),
-          p(id = "intro_texte_descr", "Text and links")
+          h4("Recurring Data", id = "intro_titre"),
+          p(id = "intro_texte_descr", "D. Dinart, C. Bellera, V. Rondeau, Sample size estimation for recurrent event data using multifrailty and multilevel survival models, Revue d'Épidémiologie et de Santé Publique, Volume 70, Supplement 2, 2022, Page S77, ISSN 0398-7620."),
         )
       ),
                          
@@ -185,6 +168,13 @@ dashboardPage(
         tabsetPanel(
           tabPanel(
             "Setting",
+            
+            fluidRow(
+              id = "DG_puiss_needHelp",
+              
+              imageOutput("needHelp"),
+              imageOutput("arrow")
+            ),
             
             h3("Power calculation parameters", id = "sous_titre"),
             
@@ -555,9 +545,9 @@ dashboardPage(
                 id="BSD_puiss_data_sujets_div",
                 
                 column(width = 4, 
-                       numericInput("BSD_puiss_nbr_groupe", "Number of groups", 10),
+                       numericInput("BSD_puiss_nbr_groupe", "Number of groups in the experimental arm", 10),
                        
-                       numericInput("BSD_puiss_prop_neg", "Patient with the control in experimental arm", 0.4)
+                       numericInput("BSD_puiss_prop_neg", "Patient with the control in experimental arm", 0.2)
                 ),
                 
                 column(width = 4,
@@ -607,38 +597,41 @@ dashboardPage(
                 div(
                   id="BSD_puiss_fisher",
                   
-                  numericInput("BSD_puiss_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
+                  numericInput("BSD_puiss_nbr_echantillon_MC", "Number of Monte Carlo runs", 100000)
                 ),
                 
                 tags$br(),
                 
-                h4("Confidence interval", id = "sous_titre_sous_partie"),
-                
-                div(
-                  id="BSD_puiss_simulation",
-                  
-                  h5("Calculate the confidence interval ?", id="IC_titre"),
-                  checkboxInput(inputId = "BSD_puiss_bootstrap", label = "Bootstrap", value = FALSE),
-                  
-                  numericInput("BSD_puiss_nboot", "Number of bootstrap resamples", 1000)
-                ),
-                
-                tags$br(),
-                
-                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                h4("Effects", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="BSD_puiss_test_beta",
                   
                   selectInput("BSD_puiss_method", "Method",
-                              c("joint",  "betatest", "betatest")),
+                              c("joint",  "betatest", "gammatest")),
+                  
+                  tags$br(),
+                  
+                  h4("Strategy Effects", id = "sous_titre_sous_partie"),
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("BSD_puiss_beta0", "Beta values under H0 (logarithm of)", value = 1)),
+                           numericInput("BSD_puiss_beta0", "Beta value under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("BSD_puiss_betaA", "Beta values under HA (logarithm of)", value = 0.75)),
+                           numericInput("BSD_puiss_betaA", "Beta value under HA (logarithm of HR)", value = 0.75)),
+                  ),
+                  
+                  tags$br(),
+                  
+                  h4("Targeted Effects", id = "sous_titre_sous_partie"),
+                  
+                  fluidRow(
+                    column(width=6, 
+                           numericInput("BSD_puiss_gamma0", "Gamma under H0 (logarithm of HR)", 1)),
+                    
+                    column(width=6, 
+                           numericInput("BSD_puiss_gammaA", "Gamma under HA (logarithm of HR)", 0.5))
                   )
                 )
               ),
@@ -655,6 +648,8 @@ dashboardPage(
                   selectInput("BSD_puiss_type_suivi", "Type of follow-up",
                               c("UptoEnd",  "Fixed")),
                   tags$br(),
+                  tags$br(),
+                  tags$br(),
                   
                   p("Define periods with the same unit for all periods !"),
                   p("Default values are in months."),
@@ -667,21 +662,11 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
+                  tags$br(),
                   
                   numericInput("BSD_puiss_param_weibull", "Shape parameter of Weibull", 1),
                   
-                  numericInput("BSD_puiss_theta", "Variability of the baseline risk at the individual level", 0.25),
-                  
-                  tags$br(),
-                  tags$br(),
-                  
-                  fluidRow(
-                    column(width=6, 
-                           numericInput("BSD_puiss_gamma0", "Gamma 0", 0.25)),
-                    
-                    column(width=6, 
-                           numericInput("BSD_puiss_gammaA", "Gamma A", 0.25))
-                  )
+                  numericInput("BSD_puiss_theta", "Variability of the baseline risk at the individual level", 0.05)
                 )
               )
             ),
@@ -758,23 +743,23 @@ dashboardPage(
                        selectInput("BSD_NSN_repartition_par_groupe", "Distribution of patient by group",
                                    c("Fixed",  "Uniform")),
                        
-                       numericInput("BSD_NSN_prop_neg", "Patient with the control in experimental arm", 0.4)
-                ),
-                
-                column(width = 4, 
-                       numericInput("BSD_NSN_ratio", "Ratio", 1),
-                       
-                       numericInput("BSD_NSN_Npts", "Npts", 2),),
-                
-                column(width = 4,
                        conditionalPanel(
                          condition = "input.BSD_NSN_repartition_par_groupe == 'Fixed'",
-                         numericInput("BSD_NSN_nbr_sujet_par_grp", "Number of subjects per group", 15)),
+                         numericInput("BSD_NSN_nbr_sujet_par_grp", "Number of subjects per group", 10)),
                        
                        conditionalPanel(
                          condition = "input.BSD_NSN_repartition_par_groupe == 'Uniform'",
                          numericInput("BSD_NSN_unif_a", "Parameter a of a uniform distribution", 1),
                          numericInput("BSD_NSN_unif_b", "Parameter b of a uniform distribution", 2))
+                       
+                ),
+                
+                column(width = 4,
+                       numericInput("BSD_NSN_prop_neg", "Patient with the control in experimental arm", 0.1)
+                ),
+                
+                column(width = 4, 
+                       numericInput("BSD_NSN_ratio", "Ratio", 1)
                 )
               )
             ),
@@ -810,38 +795,41 @@ dashboardPage(
                 div(
                   id="BSD_NSN_fisher",
                   
-                  numericInput("BSD_NSN_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
+                  numericInput("BSD_NSN_nbr_echantillon_MC", "Number of Monte Carlo runs", 100000)
                 ),
                 
                 tags$br(),
                 
-                h4("Confidence interval", id = "sous_titre_sous_partie"),
-                
-                div(
-                  id="BSD_NSN_simulation",
-                  
-                  h5("Calculate the confidence interval ?", id="IC_titre"),
-                  checkboxInput(inputId = "BSD_NSN_bootstrap", label = "Bootstrap", value = FALSE),
-                  
-                  numericInput("BSD_NSN_nboot", "Number of bootstrap resamples", 1000)
-                ),
-                
-                tags$br(),
-                
-                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                h4("Effect", id = "sous_titre_sous_partie"),
                 
                 div(
                   id="BSD_NSN_test_beta",
                   
                   selectInput("BSD_NSN_method", "Method",
-                              c("joint",  "betatest", "betatest")),
+                              c("joint",  "betatest", "gammatest")),
+                  
+                  tags$br(),
+                  
+                  h4("Strategy Effects", id = "sous_titre_sous_partie"),
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("BSD_NSN_beta0", "Beta values under H0 (logarithm of)", value = 1)),
+                           numericInput("BSD_NSN_beta0", "Beta value under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("BSD_NSN_betaA", "Beta values under HA (logarithm of)", value = 0.75)),
+                           numericInput("BSD_NSN_betaA", "Beta value under HA (logarithm of HR)", value = 0.75)),
+                  ),
+                  
+                  tags$br(),
+                  
+                  h4("Targeted Effects", id = "sous_titre_sous_partie"),
+                  
+                  fluidRow(
+                    column(width=6, 
+                           numericInput("BSD_NSN_gamma0", "Gamma under H0 (logarithm of HR)", 1)),
+                    
+                    column(width=6, 
+                           numericInput("BSD_NSN_gammaA", "Gamma unde HA (logarithm of HR)", 0.5))
                   )
                 )
               ),
@@ -857,6 +845,9 @@ dashboardPage(
                   
                   selectInput("BSD_NSN_type_suivi", "Type of follow-up",
                               c("UptoEnd",  "Fixed")),
+                  
+                  tags$br(),
+                  tags$br(),
                   tags$br(),
                   
                   p("Define periods with the same unit for all periods !"),
@@ -870,21 +861,11 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
+                  tags$br(),
                   
                   numericInput("BSD_NSN_param_weibull", "Shape parameter of Weibull", 1),
                   
-                  numericInput("BSD_NSN_theta", "Variability of the baseline risk at the individual level", 0.25),
-                  
-                  tags$br(),
-                  tags$br(),
-                  
-                  fluidRow(
-                    column(width=6, 
-                           numericInput("BSD_NSN_gamma0", "Gamma 0", 0.25)),
-                    
-                    column(width=6, 
-                           numericInput("BSD_NSN_gammaA", "Gamma A", 0.25))
-                  )
+                  numericInput("BSD_NSN_theta", "Variability of the baseline risk at the individual level", 0.05)
                 )
               )
             ),
@@ -1031,6 +1012,22 @@ dashboardPage(
                   
                   numericInput("DR_SFM_puiss_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
                 ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="DR_SFM_puiss_test_beta",
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("DR_SFM_puiss_beta0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("DR_SFM_puiss_betaA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75))
+                  )
+                )
               ),
               
               column(
@@ -1078,14 +1075,6 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
-                  
-                  fluidRow(
-                    column(width = 6,
-                           numericInput("DR_SFM_puiss_beta0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
-                    
-                    column(width = 6,
-                           numericInput("DR_SFM_puiss_betaA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75))
-                  ),
                   
                   numericInput("DR_SFM_puiss_param_weibull", "Shape parameter of Weibull", 1),
                   
@@ -1227,6 +1216,22 @@ dashboardPage(
                   
                   numericInput("DR_NFM_puiss_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
                 ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="DR_NFM_puiss_test_beta",
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("DR_NFM_puiss_beta0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("DR_NFM_puiss_betaA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75))
+                  )
+                )
               ),
               
               column(
@@ -1273,14 +1278,6 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
-                  
-                  fluidRow(
-                    column(width = 6,
-                           numericInput("DR_NFM_puiss_beta0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
-                    
-                    column(width = 6,
-                           numericInput("DR_NFM_puiss_betaA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75))
-                  ),
                   
                   numericInput("DR_NFM_puiss_param_weibull", "Shape parameter of Weibull", 1),
                   
@@ -1422,18 +1419,18 @@ dashboardPage(
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_JFM_puiss_betaR0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
+                      numericInput("DR_JFM_puiss_betaR0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                      numericInput("DR_JFM_puiss_betaRA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75)),
+                      numericInput("DR_JFM_puiss_betaRA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75)),
                   ),
                   
                   fluidRow(
                     column(width = 6,
-                      numericInput("DR_JFM_puiss_betaD0", "Beta values for terminal events under H0 (logarithm of)", value = 1)),
+                      numericInput("DR_JFM_puiss_betaD0", "Beta value for terminal events under H0 (logarithm of HR)", value = 1)),
                   
                     column(width = 6,
-                      numericInput("DR_JFM_puiss_betaDA", "Beta values for terminal events under HA (logarithm of)", value = 0.85)),
+                      numericInput("DR_JFM_puiss_betaDA", "Beta value for terminal events under HA (logarithm of HR)", value = 0.85)),
                   )
                 )
               ),
@@ -1614,18 +1611,18 @@ dashboardPage(
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_GJFM_puiss_betaR0", "Beta values for recurrent events under H0(logarithm of)", value = 1)),
+                           numericInput("DR_GJFM_puiss_betaR0", "Beta value for recurrent events under H0(logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_puiss_betaRA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75)),
+                           numericInput("DR_GJFM_puiss_betaRA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75)),
                   ),
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_GJFM_puiss_betaD0", "Beta values for terminal events under H0 (logarithm of)", value = 1)),
+                           numericInput("DR_GJFM_puiss_betaD0", "Beta value for terminal events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_puiss_betaDA", "Beta values for terminal events under HA (logarithm of)", value = 0.85)),
+                           numericInput("DR_GJFM_puiss_betaDA", "Beta value for terminal events under HA (logarithm of HR)", value = 0.85)),
                   )
                 )
               ),
@@ -1820,6 +1817,22 @@ dashboardPage(
                   
                   numericInput("DR_SFM_NSN_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
                 ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="DR_SFM_NSN_test_beta",
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("DR_SFM_NSN_beta0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("DR_SFM_NSN_betaA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75))
+                  )
+                )
               ),
               
               column(
@@ -1865,14 +1878,6 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
-                  
-                  fluidRow(
-                    column(width = 6,
-                           numericInput("DR_SFM_NSN_beta0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
-                    
-                    column(width = 6,
-                           numericInput("DR_SFM_NSN_betaA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75))
-                  ),
                   
                   numericInput("DR_SFM_NSN_param_weibull", "Shape parameter of Weibull", 1),
                   
@@ -2014,6 +2019,22 @@ dashboardPage(
                   
                   numericInput("DR_NFM_NSN_nbr_echantillon_MC", "Number of Monte Carlo runs", 10000)
                 ),
+                
+                tags$br(),
+                
+                h4("Hazard Ratio", id = "sous_titre_sous_partie"),
+                
+                div(
+                  id="DR_NFM_NSN_test_beta",
+                  
+                  fluidRow(
+                    column(width = 6,
+                           numericInput("DR_NFM_NSN_beta0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
+                    
+                    column(width = 6,
+                           numericInput("DR_NFM_NSN_betaA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75))
+                  )
+                )
               ),
               
               column(
@@ -2059,14 +2080,6 @@ dashboardPage(
                   
                   tags$br(),
                   tags$br(),
-                  
-                  fluidRow(
-                    column(width = 6,
-                           numericInput("DR_NFM_NSN_beta0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
-                  
-                    column(width = 6,
-                           numericInput("DR_NFM_NSN_betaA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75))
-                  ),
                   
                   numericInput("DR_NFM_NSN_param_weibull", "Shape parameter of Weibull", 1),
                   
@@ -2198,18 +2211,18 @@ dashboardPage(
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_JFM_NSN_betaR0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
+                           numericInput("DR_JFM_NSN_betaR0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_JFM_NSN_betaRA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75))
+                           numericInput("DR_JFM_NSN_betaRA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75))
                   ),
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_JFM_NSN_betaD0", "Beta values for terminal events under H0 (logarithm of)", value = 1)),
+                           numericInput("DR_JFM_NSN_betaD0", "Beta value for terminal events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_JFM_NSN_betaDA", "Beta values for terminal events under HA (logarithm of)", value = 0.85))
+                           numericInput("DR_JFM_NSN_betaDA", "Beta value for terminal events under HA (logarithm of HR)", value = 0.85))
                   )
                 )
               ),
@@ -2380,18 +2393,18 @@ dashboardPage(
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_GJFM_NSN_betaR0", "Beta values for recurrent events under H0 (logarithm of)", value = 1)),
+                           numericInput("DR_GJFM_NSN_betaR0", "Beta value for recurrent events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_NSN_betaRA", "Beta values for recurrent events under HA (logarithm of)", value = 0.75)),
+                           numericInput("DR_GJFM_NSN_betaRA", "Beta value for recurrent events under HA (logarithm of HR)", value = 0.75)),
                   ),
                   
                   fluidRow(
                     column(width = 6,
-                           numericInput("DR_GJFM_NSN_betaD0", "Beta values for terminal events under H0 (logarithm of)", value = 1)),
+                           numericInput("DR_GJFM_NSN_betaD0", "Beta value for terminal events under H0 (logarithm of HR)", value = 1)),
                     
                     column(width = 6,
-                           numericInput("DR_GJFM_NSN_betaDA", "Beta values for terminal events under HA (logarithm of)", value = 0.85)),
+                           numericInput("DR_GJFM_NSN_betaDA", "Beta value for terminal events under HA (logarithm of HR)", value = 0.85)),
                   )
                 )
               ),
