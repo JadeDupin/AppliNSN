@@ -3,8 +3,8 @@
 #---------------------------------------------------------------------------------------------------#
 
 setwd("P:/Appli NSN/Appli_ui_server")
-#setwd("Y:/Jade/Appli_ui_server")
-#setwd("C:/Jade/Bergonié/Appli NSN")
+#setwd("Y:/Jade/NSN/Appli_ui_server")
+#setwd("C:/Jade/BergoniÃ©/Appli NSN")
 
 
 
@@ -12,11 +12,11 @@ setwd("P:/Appli NSN/Appli_ui_server")
 # Lexique--------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------#
 
-# DG = Données groupées
+# DG = DonnÃ©es groupÃ©es
 
 # BSD = Biomarker strategy design
 
-# DR = Données récurrentes
+# DR = DonnÃ©es rÃ©currentes
   # SFM = Shared Frailty Model
   # NFM = Nested Frailty Model
   # JFM = Joint Frailty Model
@@ -36,15 +36,15 @@ setwd("P:/Appli NSN/Appli_ui_server")
 source("helpTab/helpTab.R")
 
 #DG
-# source("Y:/Jade/Programmation/1 - Grouped data/Rcode_AddFM.R")
-#source("C:/Jade/Bergonié/Appli NSN/Rcode_AddFM.R")
+# source("Y:/Jade/NSN/Programmation/1 - Grouped data/Rcode_AddFM.R")
+#source("C:/Jade/BergoniÃ©/Appli NSN/Rcode_AddFM.R")
 
 
 #DR
-# source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_SFM.R")
-# source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_NFM.R")
-# source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_JFM.R")
-# source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_GJFM.R")
+# source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_SFM.R")
+# source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_NFM.R")
+# source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_JFM.R")
+# source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_GJFM.R")
 
 
 #BSD
@@ -150,7 +150,7 @@ dashboardPage(
           
           
           h4("Recurring Data", id = "intro_titre"),
-          p(id = "intro_texte_descr", "D. Dinart, C. Bellera, V. Rondeau, Sample size estimation for recurrent event data using multifrailty and multilevel survival models, Revue d'Épidémiologie et de Santé Publique, Volume 70, Supplement 2, 2022, Page S77, ISSN 0398-7620."),
+          p(id = "intro_texte_descr", "D. Dinart, C. Bellera, V. Rondeau, Sample size estimation for recurrent event data using multifrailty and multilevel survival models, Revue d'ÃpidÃ©miologie et de SantÃ© Publique, Volume 70, Supplement 2, 2022, Page S77, ISSN 0398-7620."),
         )
       ),
                          
@@ -168,13 +168,6 @@ dashboardPage(
         tabsetPanel(
           tabPanel(
             "Setting",
-            
-            fluidRow(
-              id = "DG_puiss_needHelp",
-              
-              imageOutput("needHelp"),
-              imageOutput("arrow")
-            ),
             
             h3("Power calculation parameters", id = "sous_titre"),
             
@@ -486,7 +479,7 @@ dashboardPage(
               fluidRow(
                 id="DG_NSN_res_FR",
                 
-                h3(id="DG_resultat_titre", "Résultats"),
+                h3(id="DG_resultat_titre", "RÃ©sultats"),
                 
                 tags$br(),
                 
@@ -884,7 +877,7 @@ dashboardPage(
               fluidRow(
                 id="BSD_NSN_res_FR",
                 
-                h3(id="BSD_resultat_titre", "Résultats"),
+                h3(id="BSD_resultat_titre", "RÃ©sultats"),
                 
                 tags$br(),
                 
@@ -1070,7 +1063,7 @@ dashboardPage(
                   
                   conditionalPanel(
                     condition = "input.DR_SFM_puiss_distrib_death == 'Exponential'",
-                    numericInput("DR_SFM_puiss_cencor_time_death", "Censor time for death (parameter λ)", 15)
+                    numericInput("DR_SFM_puiss_cencor_time_death", "Censor time for death (parameter Î»)", 15)
                   ),
                   
                   tags$br(),
@@ -1274,7 +1267,7 @@ dashboardPage(
                   
                   conditionalPanel(
                     condition = "input.DR_NFM_puiss_distrib_death == 'Exponential'",
-                    numericInput("DR_NFM_puiss_cencor_time_death", "Censor time for death (parameter λ)", 5)),
+                    numericInput("DR_NFM_puiss_cencor_time_death", "Censor time for death (parameter Î»)", 5)),
                   
                   tags$br(),
                   tags$br(),
@@ -1731,7 +1724,7 @@ dashboardPage(
           tabPanel(
             "Shared Frailty Model",
             
-            h3("Power calculation parameters", id = "sous_titre"),
+            h3("NSN calculation parameters", id = "sous_titre"),
             
             tags$br(),
             
@@ -1874,7 +1867,7 @@ dashboardPage(
                   
                   conditionalPanel(
                     condition = "input.DR_SFM_NSN_distrib_death == 'Exponential'",
-                    numericInput("DR_SFM_NSN_cencor_time_death", "Censor time for death (parameter λ)", 15)),
+                    numericInput("DR_SFM_NSN_cencor_time_death", "Censor time for death (parameter Î»)", 15)),
                   
                   tags$br(),
                   tags$br(),
@@ -1917,7 +1910,7 @@ dashboardPage(
           tabPanel(
             "Nested Frailty Model",
             
-            h3("Power calculation parameters", id = "sous_titre"),
+            h3("NSN calculation parameters", id = "sous_titre"),
             
             tags$br(),
             
@@ -2076,7 +2069,7 @@ dashboardPage(
                   
                   conditionalPanel(
                     condition = "input.DR_NFM_NSN_distrib_death == 'Exponential'",
-                    numericInput("DR_NFM_NSN_cencor_time_death", "Censor time for death (parameter λ)", 15)),
+                    numericInput("DR_NFM_NSN_cencor_time_death", "Censor time for death (parameter Î»)", 15)),
                   
                   tags$br(),
                   tags$br(),
@@ -2125,7 +2118,7 @@ dashboardPage(
           tabPanel(
             "Joint Frailty Model",
             
-            h3("Power calculation parameters", id = "sous_titre"),
+            h3("NSN calculation parameters", id = "sous_titre"),
             
             tags$br(),
             
@@ -2307,7 +2300,7 @@ dashboardPage(
           tabPanel(
             "General Joint Frailty Model",
             
-            h3("Power calculation parameters", id = "sous_titre"),
+            h3("NSN calculation parameters", id = "sous_titre"),
             
             tags$br(),
             
@@ -2499,7 +2492,7 @@ dashboardPage(
             )
           )
         )
-      )#end tabItem de données récurrentes
+      )#end tabItem de donnÃ©es rÃ©currentes
 
     ) #end de tabItems
   ) #end de dashboardBody

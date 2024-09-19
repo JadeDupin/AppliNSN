@@ -3,18 +3,18 @@
 #---------------------------------------------------------------------------------------------------#
 
 setwd("P:/Appli NSN/Appli_ui_server")
-#setwd("Y:/Jade/Appli_ui_server")
-#setwd("C:/Jade/Bergonié/Appli NSN")
+#setwd("Y:/Jade/NSN/Appli_ui_server")
+#setwd("C:/Jade/BergoniÃ©/Appli NSN")
 
 
 #---------------------------------------------------------------------------------------------------#
 # Lexique--------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------#
-# DG = Données groupées
+# DG = DonnÃ©es groupÃ©es
 
 # BSD = Biomarker strategy design
 
-# DR = Données récurrentes
+# DR = DonnÃ©es rÃ©currentes
   # SFM = Shared Frailty Model
   # NFM = Nested Frailty Model
   # JFM = Joint Frailty Model
@@ -29,19 +29,19 @@ setwd("P:/Appli NSN/Appli_ui_server")
 #---------------------------------------------------------------------------------------------------#
 
 #DG
-source("Y:/Jade/Programmation/1 - Grouped data/Rcode_AddFM.R")
-#source("C:/Jade/Bergonié/Appli NSN/Rcode_AddFM.R")
+source("Y:/Jade/NSN/Programmation/1 - Grouped data/Rcode_AddFM.R")
+#source("C:/Jade/BergoniÃ©/Appli NSN/Rcode_AddFM.R")
 
 
 #DR
-source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_SFM.R")
-source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_NFM.R")
-source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_JFM.R")
-source("Y:/Jade/Programmation/2 - Recurrent data/Rcode_GJFM.R")
+source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_SFM.R")
+source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_NFM.R")
+source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_JFM.R")
+source("Y:/Jade/NSN/Programmation/2 - Recurrent data/Rcode_GJFM.R")
 
 
 #BSD
-source("Y:/Jade/Programmation/3 - Biomarker strategy design/Rcode_BSD_PCFM.R")
+source("Y:/Jade/NSN/Programmation/3 - Biomarker strategy design/Rcode_BSD_PCFM.R")
 
 
 #---------------------------------------------------------------------------------------------------#
@@ -63,13 +63,13 @@ library(stringr)
 
 
 ##==========================================================================================================#
-# Début de code #############################################################################################
+# DÃ©but de code #############################################################################################
 ##==========================================================================================================#
 
 function(input, output) {
   
 ##----------------------------------------------------------------------------------------------------------#
-## Données groupées------------------------------------------------------------------------------------------
+## DonnÃ©es groupÃ©es------------------------------------------------------------------------------------------
 ##----------------------------------------------------------------------------------------------------------#
   
   ### Puissance - Calcul ------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ function(input, output) {
     
   })
   
-  ### Puissance - affichage du résultats --------------------------------------------------------------------
+  ### Puissance - affichage du rÃ©sultats --------------------------------------------------------------------
   observeEvent(input$DG_lance_puissance, {
     
     shinyjs::show(id = "DG_puiss_res_FR")
@@ -163,7 +163,7 @@ function(input, output) {
     
   })
   
-  ### NSN - affichage du résultats --------------------------------------------------------------------------
+  ### NSN - affichage du rÃ©sultats --------------------------------------------------------------------------
   observeEvent(input$DG_lance_NSN, {
     
     shinyjs::show(id = "DG_NSN_res_FR")
@@ -244,7 +244,7 @@ function(input, output) {
   })
   
   
-  ### Puissance - affichage du résultats --------------------------------------------------------------------
+  ### Puissance - affichage du rÃ©sultats --------------------------------------------------------------------
   observeEvent(input$BSD_lance_puissance, {
     
     shinyjs::show(id = "BSD_puiss_res_FR")
@@ -300,7 +300,7 @@ function(input, output) {
   
   
   
-  ### NSN - affichage du résultats --------------------------------------------------------------------------
+  ### NSN - affichage du rÃ©sultats --------------------------------------------------------------------------
   observeEvent(input$BSD_lance_NSN, {
     
     shinyjs::show(id = "BSD_NSN_res_FR")
@@ -338,7 +338,7 @@ function(input, output) {
   
   
 ##----------------------------------------------------------------------------------------------------------#
-## Données récurrentes---------------------------------------------------------------------------------------
+## DonnÃ©es rÃ©currentes---------------------------------------------------------------------------------------
 ##----------------------------------------------------------------------------------------------------------#
   
   ### SFM----------------------------------------------------------------------------------------------------
@@ -347,7 +347,7 @@ function(input, output) {
   
   DR_SFM_puiss_calc_puiss <- eventReactive(input$DR_SFM_lance_puissance, {
     
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_SFM_puiss_nbr_events_par_grp_unif <- c(input$DR_SFM_puiss_nbr_events_par_grp_unif_a, input$DR_SFM_puiss_nbr_events_par_grp_unif_b)
     
     if(input$DR_SFM_puiss_repartition_events == "Fixed" || input$DR_SFM_puiss_repartition_events == "Poisson"){
@@ -359,7 +359,7 @@ function(input, output) {
     
     
     
-    ## si unif pour répartition des décès
+    ## si unif pour rÃ©partition des dÃ©cÃ¨s
     DR_SFM_puiss_censor_death_unif <- c(input$DR_SFM_puiss_cencor_time_death_unif_a, input$DR_SFM_puiss_cencor_time_death_unif_b)
     
     if(input$DR_SFM_puiss_distrib_death == "Exponential"){
@@ -398,15 +398,15 @@ function(input, output) {
   })
   
   
-  #### Puissance - affichage du résultats -------------------------------------------------------------------
+  #### Puissance - affichage du rÃ©sultats -------------------------------------------------------------------
   observeEvent(input$DR_SFM_lance_puissance, {
     
     shinyjs::show(id = "DR_SFM_puiss_res_FR")
     
     output$DR_SFM_puiss_valeur_res <- renderUI({
       str1 <- paste("Power:", round(DR_SFM_puiss_calc_puiss()$power, digits=3))
-      str2 <- paste("Under H0, N° events:", round(DR_SFM_puiss_calc_puiss()$events[1], digits=2), "in total")
-      str3 <- paste("Under HA, N° events:", round(DR_SFM_puiss_calc_puiss()$events[2], digits=2), "in total")
+      str2 <- paste("Under H0, NÂ° events:", round(DR_SFM_puiss_calc_puiss()$events[1], digits=2), "in total")
+      str3 <- paste("Under HA, NÂ° events:", round(DR_SFM_puiss_calc_puiss()$events[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -419,7 +419,7 @@ function(input, output) {
   #### NSN - Calcul------------------------------------------------------------------------------------
   
   DR_SFM_NSN_calc_NSN <- eventReactive(input$DR_SFM_lance_NSN, {
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_SFM_NSN_nbr_events_par_grp_unif <- c(input$DR_SFM_NSN_nbr_events_par_grp_unif_a, input$DR_SFM_NSN_nbr_events_par_grp_unif_b)
     
     if(input$DR_SFM_NSN_repartition_events == "Fixed" || input$DR_SFM_NSN_repartition_events == "Poisson"){
@@ -431,7 +431,7 @@ function(input, output) {
     
     
     
-    ## si unif pour répartition des décès
+    ## si unif pour rÃ©partition des dÃ©cÃ¨s
     DR_SFM_NSN_censor_death_unif <- c(input$DR_SFM_NSN_cencor_time_death_unif_a, input$DR_SFM_NSN_cencor_time_death_unif_b)
     
     if(input$DR_SFM_NSN_distrib_death == "Exponential"){
@@ -469,7 +469,7 @@ function(input, output) {
   })
   
   
-  #### NSN - affichage du résultats -------------------------------------------------------------------------
+  #### NSN - affichage du rÃ©sultats -------------------------------------------------------------------------
   
   observeEvent(input$DR_SFM_lance_NSN, {
     
@@ -491,8 +491,8 @@ function(input, output) {
       str3 <- paste("Type of events distribution:", DR_SFM_NSN_calc_NSN()$ni_type)
       str4 <- paste("True power:", round(DR_SFM_NSN_calc_NSN()$true_power, digits=3))
       str5 <- paste("Type I error:", DR_SFM_NSN_calc_NSN()$alpha)
-      str6 <- paste("Under H0, N° events:", round(DR_SFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
-      str7 <- paste("Under HA, N° events:", round(DR_SFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
+      str6 <- paste("Under H0, NÂ° events:", round(DR_SFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
+      str7 <- paste("Under HA, NÂ° events:", round(DR_SFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
 
       HTML(paste(str1,
                  str2,
@@ -514,7 +514,7 @@ function(input, output) {
   
   DR_NFM_puiss_calc_puiss <- eventReactive(input$DR_NFM_lance_puissance, {
     
-    ## si unif pour répartition subgroups
+    ## si unif pour rÃ©partition subgroups
     DR_NFM_puiss_nbr_subgrp_unif <- c(input$DR_NFM_puiss_nbr_subgroups_unif_a, input$DR_NFM_puiss_nbr_subgroups_unif_b)
     
     if(input$DR_NFM_puiss_repartition_subgroups == "Fixed" || input$DR_NFM_puiss_repartition_subgroups == "Poisson"){
@@ -525,7 +525,7 @@ function(input, output) {
     }
     
     
-    ## si unif pour répartition events
+    ## si unif pour rÃ©partition events
     DR_NFM_puiss_nbr_events_par_subgrp_unif <- c(input$DR_NFM_puiss_nbr_events_par_subgrp_unif_a, input$DR_NFM_puiss_nbr_events_par_subgrp_unif_b)
     
     if(input$DR_NFM_puiss_repartition_events == "Fixed" || input$DR_NFM_puiss_repartition_events == "Poisson"){
@@ -536,7 +536,7 @@ function(input, output) {
     }
     
     
-    ## si unif pour répartition des décès
+    ## si unif pour rÃ©partition des dÃ©cÃ¨s
     DR_NFM_puiss_censor_death_unif <- c(input$DR_NFM_puiss_cencor_time_death_unif_a, input$DR_NFM_puiss_cencor_time_death_unif_b)
     
     if(input$DR_NFM_puiss_distrib_death == "Exponential"){
@@ -579,15 +579,15 @@ function(input, output) {
   })
   
   
-  #### Puissance - affichage du résultats -------------------------------------------------------------------
+  #### Puissance - affichage du rÃ©sultats -------------------------------------------------------------------
   observeEvent(input$DR_NFM_lance_puissance, {
     
     shinyjs::show(id = "DR_NFM_puiss_res_FR")
     
     output$DR_NFM_puiss_valeur_res <- renderUI({
       str1 <- paste("Power:", round(DR_NFM_puiss_calc_puiss()$power, digits=3))
-      str2 <- paste("Under H0, N° events:", round(DR_NFM_puiss_calc_puiss()$events[1], digits=2), "in total")
-      str3 <- paste("Under HA, N° events:", round(DR_NFM_puiss_calc_puiss()$events[2], digits=2), "in total")
+      str2 <- paste("Under H0, NÂ° events:", round(DR_NFM_puiss_calc_puiss()$events[1], digits=2), "in total")
+      str3 <- paste("Under HA, NÂ° events:", round(DR_NFM_puiss_calc_puiss()$events[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -601,7 +601,7 @@ function(input, output) {
   
   DR_NFM_NSN_calc_NSN <- eventReactive(input$DR_NFM_lance_NSN, {
     
-    ## si unif pour répartition subgroups
+    ## si unif pour rÃ©partition subgroups
     DR_NFM_NSN_nbr_subgrp_unif <- c(input$DR_NFM_NSN_nbr_subgroups_unif_a, input$DR_NFM_NSN_nbr_subgroups_unif_b)
     
     if(input$DR_NFM_NSN_repartition_subgroups == "Fixed" || input$DR_NFM_NSN_repartition_subgroups == "Poisson"){
@@ -612,7 +612,7 @@ function(input, output) {
     }
     
     
-    ## si unif pour répartition events
+    ## si unif pour rÃ©partition events
     DR_NFM_NSN_nbr_events_par_subgrp_unif <- c(input$DR_NFM_NSN_nbr_events_par_subgrp_unif_a, input$DR_NFM_NSN_nbr_events_par_subgrp_unif_b)
     
     if(input$DR_NFM_NSN_repartition_events == "Fixed" || input$DR_NFM_NSN_repartition_events == "Poisson"){
@@ -623,7 +623,7 @@ function(input, output) {
     }
     
     
-    ## si unif pour répartition des décès
+    ## si unif pour rÃ©partition des dÃ©cÃ¨s
     DR_NFM_NSN_censor_death_unif <- c(input$DR_NFM_NSN_cencor_time_death_unif_a, input$DR_NFM_NSN_cencor_time_death_unif_b)
     
     if(input$DR_NFM_NSN_distrib_death == "Exponential"){
@@ -665,7 +665,7 @@ function(input, output) {
   })
   
   
-  #### NSN - affichage du résultats -------------------------------------------------------------------------
+  #### NSN - affichage du rÃ©sultats -------------------------------------------------------------------------
   
   observeEvent(input$DR_NFM_lance_NSN, {
     
@@ -700,8 +700,8 @@ function(input, output) {
       
       str6 <- paste("True power:", round(DR_NFM_NSN_calc_NSN()$true_power, digits=3))
       str7 <- paste("Type I error:", DR_NFM_NSN_calc_NSN()$alpha)
-      str8 <- paste("Under H0, N° events:", round(DR_NFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
-      str9 <- paste("Under HA, N° events:", round(DR_NFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
+      str8 <- paste("Under H0, NÂ° events:", round(DR_NFM_NSN_calc_NSN()$events[1], digits = 2), "in total")
+      str9 <- paste("Under HA, NÂ° events:", round(DR_NFM_NSN_calc_NSN()$events[2], digits = 2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -725,7 +725,7 @@ function(input, output) {
   
   DR_JFM_puiss_calc_puiss <- eventReactive(input$DR_JFM_lance_puissance, {
     
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_JFM_puiss_nbr_events_par_grp_unif <- c(input$DR_JFM_puiss_nbr_events_par_grp_unif_a, input$DR_JFM_puiss_nbr_events_par_grp_unif_b)
     
     if(input$DR_JFM_puiss_repartition_events == "Maximum" || input$DR_JFM_puiss_repartition_events == "Poisson"){
@@ -766,7 +766,7 @@ function(input, output) {
   })
   
   
-  #### Puissance - affichage du résultats -------------------------------------------------------------------
+  #### Puissance - affichage du rÃ©sultats -------------------------------------------------------------------
   observeEvent(input$DR_JFM_lance_puissance, {
     
     shinyjs::show(id = "DR_JFM_puiss_res_FR")
@@ -775,12 +775,12 @@ function(input, output) {
       str1 <- paste("Power:", round(DR_JFM_puiss_calc_puiss()$power, digits=3))
       
       str2 <- paste("Recurrent events:")
-      str3 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
-      str4 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
+      str3 <- paste("Under H0, NÂ° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
+      str4 <- paste("Under HA, NÂ° events:", round(DR_JFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
       
       str5 <- paste("Terminal events:")
-      str6 <- paste("Under H0, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
-      str7 <- paste("Under HA, N° events:", round(DR_JFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
+      str6 <- paste("Under H0, NÂ° events:", round(DR_JFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
+      str7 <- paste("Under HA, NÂ° events:", round(DR_JFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  "\n",
@@ -800,7 +800,7 @@ function(input, output) {
   
   DR_JFM_NSN_calc_NSN <- eventReactive(input$DR_JFM_lance_NSN, {
     
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_JFM_NSN_nbr_events_par_grp_unif <- c(input$DR_JFM_NSN_nbr_events_par_grp_unif_a, input$DR_JFM_NSN_nbr_events_par_grp_unif_b)
     
     if(input$DR_JFM_NSN_repartition_events == "Maximum" || input$DR_JFM_NSN_repartition_events == "Poisson"){
@@ -843,7 +843,7 @@ function(input, output) {
   
   
   
-  #### NSN - affichage du résultats -------------------------------------------------------------------------
+  #### NSN - affichage du rÃ©sultats -------------------------------------------------------------------------
   observeEvent(input$DR_JFM_lance_NSN, {
     
     shinyjs::show(id = "DR_JFM_NSN_res_FR")
@@ -868,12 +868,12 @@ function(input, output) {
       str5 <- paste("Type I error:", DR_JFM_NSN_calc_NSN()$alpha)
       
       str6 <- paste("Recurrent events:")
-      str7 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
-      str8 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
+      str7 <- paste("Under H0, NÂ° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
+      str8 <- paste("Under HA, NÂ° events:", round(DR_JFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
       
       str9 <- paste("Terminal events:")
-      str10 <- paste("Under H0, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
-      str11 <- paste("Under HA, N° events:", round(DR_JFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
+      str10 <- paste("Under H0, NÂ° events:", round(DR_JFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
+      str11 <- paste("Under HA, NÂ° events:", round(DR_JFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
@@ -900,7 +900,7 @@ function(input, output) {
   
   DR_GJFM_puiss_calc_puiss <- eventReactive(input$DR_GJFM_lance_puissance, {
     
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_GJFM_puiss_nbr_events_par_grp_unif <- c(input$DR_GJFM_puiss_nbr_events_par_grp_unif_a, input$DR_GJFM_puiss_nbr_events_par_grp_unif_b)
     
     if(input$DR_GJFM_puiss_repartition_events == "Maximum" || input$DR_GJFM_puiss_repartition_events == "Poisson"){
@@ -942,7 +942,7 @@ function(input, output) {
   
   
   
-  #### Puissance - affichage du résultats -------------------------------------------------------------------
+  #### Puissance - affichage du rÃ©sultats -------------------------------------------------------------------
   observeEvent(input$DR_GJFM_lance_puissance, {
     
     shinyjs::show(id = "DR_GJFM_puiss_res_FR")
@@ -951,12 +951,12 @@ function(input, output) {
       str1 <- paste("Power:", round(DR_GJFM_puiss_calc_puiss()$power, digits=3))
       
       str2 <- paste("Recurrent events:")
-      str3 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
-      str4 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
+      str3 <- paste("Under H0, NÂ° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[1], digits=2), "in total")
+      str4 <- paste("Under HA, NÂ° events:", round(DR_GJFM_puiss_calc_puiss()$events_rec[2], digits=2), "in total")
       
       str5 <- paste("Terminal events:")
-      str6 <- paste("Under H0, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
-      str7 <- paste("Under HA, N° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
+      str6 <- paste("Under H0, NÂ° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[1], digits=2), "in total")
+      str7 <- paste("Under HA, NÂ° events:", round(DR_GJFM_puiss_calc_puiss()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  "\n",
@@ -977,7 +977,7 @@ function(input, output) {
   
   DR_GJFM_NSN_calc_NSN <- eventReactive(input$DR_GJFM_lance_NSN, {
     
-    ## si unif pour répartition events par grp
+    ## si unif pour rÃ©partition events par grp
     DR_GJFM_NSN_nbr_events_par_grp_unif <- c(input$DR_GJFM_NSN_nbr_events_par_grp_unif_a, input$DR_GJFM_NSN_nbr_events_par_grp_unif_b)
     
     if(input$DR_GJFM_NSN_repartition_events == "Maximum" || input$DR_GJFM_NSN_repartition_events == "Poisson"){
@@ -1019,7 +1019,7 @@ function(input, output) {
   })
   
   
-  #### NSN - affichage du résultats -------------------------------------------------------------------------
+  #### NSN - affichage du rÃ©sultats -------------------------------------------------------------------------
   observeEvent(input$DR_GJFM_lance_NSN, {
     
     shinyjs::show(id = "DR_GJFM_NSN_res_FR")
@@ -1044,12 +1044,12 @@ function(input, output) {
       str5 <- paste("Type I error:", DR_GJFM_NSN_calc_NSN()$typeIerror)
       
       str6 <- paste("Recurrent events:")
-      str7 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
-      str8 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
+      str7 <- paste("Under H0, NÂ° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[1], digits=2), "in total")
+      str8 <- paste("Under HA, NÂ° events:", round(DR_GJFM_NSN_calc_NSN()$events_rec[2], digits=2), "in total")
       
       str9 <- paste("Terminal events:")
-      str10 <- paste("Under H0, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
-      str11 <- paste("Under HA, N° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
+      str10 <- paste("Under H0, NÂ° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[1], digits=2), "in total")
+      str11 <- paste("Under HA, NÂ° events:", round(DR_GJFM_NSN_calc_NSN()$events_D[2], digits=2), "in total")
       
       HTML(paste(str1,
                  str2,
